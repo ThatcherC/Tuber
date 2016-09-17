@@ -12,7 +12,7 @@ class Mode():
         self.enabled = enabled
 
     def set_display_name(self,display_name):
-	self.display_name = display_name
+        self.display_name = display_name
 
     def get_display_name(self):
         return self.display_name
