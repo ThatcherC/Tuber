@@ -13,10 +13,15 @@ function getWalkingDirections(endPoints, request)
 	request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
       mode = JSON.parse(body);
-    	console.log(mode["routes"][0]["legs"]);
+      
+      var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
+      var steps_list = mode["routes"][0]["legs"][0]["steps"];
+      var output = {"total_time":total_time,"steps_list":steps_list};
+      
+      console.log(output);
    	}
   });
-	return mode;
+	return output;
 }
 
 function getDrivingDirections(endPoints, request)
@@ -29,10 +34,14 @@ function getDrivingDirections(endPoints, request)
   request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
        mode = JSON.parse(body);
-    	console.log(mode["routes"][0]["legs"]);
-    }
+      var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
+      var steps_list = mode["routes"][0]["legs"][0]["steps"];
+      var output = {"total_time":total_time,"steps_list":steps_list};
+      
+      console.log(output);
+   	}
   });
-  return mode;
+	return output;
 }
 
 function getBikingDirections(endPoints, request)
@@ -45,10 +54,14 @@ function getBikingDirections(endPoints, request)
   request(apiUrl, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
          mode = JSON.parse(body);
-      	console.log(mode["routes"][0]["legs"]);
-     	}
-   });
-  return mode;
+      var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
+      var steps_list = mode["routes"][0]["legs"][0]["steps"];
+      var output = {"total_time":total_time,"steps_list":steps_list};
+      
+      console.log(output);
+   	}
+  });
+	return output;
 }
 
 module.exports = {
