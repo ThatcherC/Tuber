@@ -18,12 +18,14 @@ function initializeMap(){
 
 function setStart(){
   console.log("Setting start point");
+  var center = map.getCenter();
   startMarker = new google.maps.Marker({
-    position: map.getCenter(),
+    position: center,
     map: map,
     label: "Start Point",
-    draggable: True
+    draggable: true
   });
+  startBox.value = center.lat+", "+center.lng;
 }
 
 function setDestination(){
@@ -32,6 +34,6 @@ function setDestination(){
     position: map.getCenter(),
     map: map,
     label: "End Point",
-    draggable: True
+    draggable: true
   });
 }

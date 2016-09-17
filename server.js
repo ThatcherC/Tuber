@@ -23,29 +23,26 @@ app.post("/",function(req, res, endPoints){
 	//findBestMode(endPoints, null, null, null);
 
 
-  	// API retrieval
+	// API retrieval
 
-  	//Load the request module
-  	var request = require('request');
-  	var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
-  	var apiUrl = "";
+	//Load the request module
+	var request = require('request');
+	var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
+	var apiUrl = "";
 
-  	for (var i = 0; i < 3; i++) {
-  		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
-  		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" +
-  		mode + "&key=" + apiKey
-  		var keys = Object.keys(modes)
-  		request(apiUrl, function (error, response, body) {
-		if (!error && response.statusCode == 200) {
-        	modes[keys[i]] = JSON.parse(body);
-      		console.log(modes[keys[i]["routes"][0]["legs"]]);
-     	}
-    });
-  	}
-  	//Lets try to make a HTTP GET request to modulus.io's website.
-
+	for (var i = 0; i < 3; i++) {
+		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" +
+		mode + "&key=" + apiKey
+		var keys = Object.keys(modes)
+		request(apiUrl, function (error, response, body) {
+    	  if (!error && response.statusCode == 200) {
+          	modes[keys[i]] = JSON.parse(body);
+        		console.log(modes[keys[i]["routes"][0]["legs"]]);
+       	}
+      });
+	}
   res.send(req.body);
-
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
