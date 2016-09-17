@@ -4,11 +4,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var endPoints = {};
-
-var modes = {"driving":"", "walking":"", "bicycling":""};
-
-//walkingObject = {time, cost, energy, [stylepoints],[directions]}
+const APIKEY = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
 var modeList = {};
+
+
 
 var app = express();
 app.use(express.static('static'));
@@ -19,30 +18,11 @@ app.listen(8080);
 
 //Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res, endPoints){
+	// var modes = {"driving":"", "walking":"", "bicycling":""};
+	endPoints = req.body;
+	findBestMode(endPoints, null, null, null);
+
   res.send(req.body);
-  endPoints = req.body;
-
-
-  	// API retrieval
-
-  	//Load the request module
-  	var request = require('request');
-  	var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
-  	var apiUrl = "";
-
-  	for (int i = 0; i < 3; i++) {
-  		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" 
-  		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" + 
-  		mode + "&key=" + apiKey
-  		var keys = Object.keys(modes)
-  		request(apiUrl, function (error, response, body) {
-		if (!error && response.statusCode == 200) {
-        	modes[keys[i]] = JSON.parse(body);
-      		console.log(modes[keys[i]["routes"][0]["legs"]]);
-     	}
-    });
-  	}
-  	//Lets try to make a HTTP GET request to modulus.io's website.
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
@@ -60,10 +40,10 @@ function addMode(name, baseMode, eval){
 }
 
 
-// addMode("Cartwheeling", 'walking', function(walkingObject){
-//   walkingObject.time = walkingObject.time*0.7;
-//   walkingObject.energy = walkingObject.energy*2.5;
-// });
+addMode("Cartwheeling", 'walking', function(walkingObject){
+  walkingObject.time = walkingObject.time*0.7;
+  walkingObject.energy = walkingObject.energy*2.5;
+});
 
 addMode("Cartwheeling", 'walking', function(walkingObject){
   var cartwheelingObject = {};
@@ -104,20 +84,28 @@ addMode("Wheelchair", 'walking', function(walkingObject){
 //optimizationParameter = "time", "cost", "energy", "style points"
 //optimizationDirection = "up","down"
 
-/*
-function findBestMode(start, destination, enabledModes, optimizationParameter, optimizationDirection){
-  walkingObject = getWalkingDirections();
-  drivingObject = getDrivingDirections();
+
+function findBestMode(endPoints, 
+										  enabledModes, 
+										  optimizationParameter, 
+										  optimizationDirection) 
+{
+	var request = require('request');
+  walkingObject = getWalkingDirections(endPoints, request);
+  drivingObject = getDrivingDirections(endPoints, request);
+  bikingObject = getBikingDirections(endPoints, request);
 
   var modeResults = [];
 
   for(var i = 0; i < enabledModes.length; i++){
     var object = {};
-    if(modeList[enabledModes[i]].baseMode == 'walking'){
+    if(modeList[enabledModes[i]].baseMode == 'walking') {
       object = JSON.parse(JSON.stringify(walkingObject));
-    }else if(modeList[enabledModes[i]].baseMode == 'driving'){
+    }
+    else if(modeList[enabledModes[i]].baseMode == 'driving') {
       object = JSON.parse(JSON.stringify(drivingObject));
-    }else{
+    }
+    else {
       //what TODO here? pass start and end lat/lng to object???
     }
     var result = modeList[enabledModes[i]].eval(object);
@@ -126,5 +114,52 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
 
   //sort modes by chosen paramter
 }
-*/
+
+function getWalkingDirections(endPoints, request)
+{
+	var mode = null;
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" 
+  + endPoints["start"] + "&destination=" + endPoints["end"] + 
+  "&modewalking&key=" + APIKEY
+
+	request(apiUrl, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+      mode = JSON.parse(body);
+    	console.log(mode["routes"][0]["legs"]);
+   	}
+  });
+	return mode;
+}
+
+function getDrivingDirections(endPoints, request)
+{
+	var mode = null;
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  + endPoints["start"] + "&destination=" + endPoints["end"] + 
+  "&modedriving&key=" + APIKEY
+
+  request(apiUrl, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+      var mode = JSON.parse(body);
+    	console.log(mode["routes"][0]["legs"]);
+    }
+  });
+  return mode;
+}
+
+function getBikingDirections(endPoints, request)
+{
+	var mode = null;
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" 
+  + endPoints["start"] + "&destination=" + endPoints["end"] + 
+  "&modebicycling&key=" + APIKEY
+
+  request(apiUrl, function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+        var mode = JSON.parse(body);
+      	console.log(mode["routes"][0]["legs"]);
+     	}
+   });
+  return mode;
+}
 
