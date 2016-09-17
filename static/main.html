@@ -11,23 +11,38 @@
       <div class="col-lg-3">
         <h1>Tuber</h1>
 
-        <form action="localhost:8080/" method="post">
+        <form action="/" method="post">
 
           <div class="form-group">
             <label class="col-sm-3 control-label">Start</label>
-            <div class="col-sm-4">
+            <div class="col-sm-9">
               <input class="form-control" name="start" id="startLocation" onchange="">
             </div>
           </div>
+        </br>
 
           <div class="form-group">
             <label class="col-sm-3 control-label">Destination</label>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <input class="form-control" name="end" id="endLocation" onchange="">
             </div>
+            <div class="col-sm-3">
+              <button class="btn btn-default" onpress="">Set Location</button>
+            </div>
+          </div>
+          </br>
+          </br>
+
+          <button type="submit" class="btn btn-default">Go!</button>
+
+          <!-- modes -->
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="mode-name" value="">
+              Cartwheel mode
+            </label>
           </div>
 
-          <button type="submit" class="btn btn-default">Create and Download</button>
         </form>
 
       </div>
