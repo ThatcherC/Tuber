@@ -4,12 +4,16 @@ var map;
 var startMarker;
 var endMarker;
 
+var startBox;
+var destinationBox;
 
 function initializeMap(){
   map = new google.maps.Map(document.getElementById('gmap'), {
           center: {lat: 42.359667, lng: -71.087549},
           zoom: 13
         });
+  startBox = document.getElementById('startLocation');
+  endBox   = document.getElementById('endLocation');
 }
 
 function setStart(){
