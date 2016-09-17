@@ -7,7 +7,7 @@ var endPoints = {};
 
 var modes = {"driving":"", "walking":"", "bicycling":""};
 
-//walkingObject = {time, cost, energy, [directions]}
+//walkingObject = {time, cost, energy, [stylepoints],[directions]}
 var modeList = {};
 
 var app = express();
@@ -59,10 +59,44 @@ function addMode(name, baseMode, eval){
   modeList[name] = obj;
 }
 
+
 // addMode("Cartwheeling", 'walking', function(walkingObject){
 //   walkingObject.time = walkingObject.time*0.7;
 //   walkingObject.energy = walkingObject.energy*2.5;
 // });
+
+addMode("Cartwheeling", 'walking', function(walkingObject){
+  var cartwheelingObject = {};
+  cartwheelingObject.time = walkingObject.time*2.4;
+  cartwheelingObject.energy = walkingObject.energy*2.5;
+  cartwheelingObject.stylepoints = walkingObject.stylepoints*21;
+  return cartwheelingObject;
+});
+
+addMode("Hoverboarding- Back to the Future Style", 'walking', function(walkingObject){
+  var hoverboardingObject = {};
+  hoverboardingObject.time = walkingObject.time*0.7;
+  hoverboardingObject.energy = walkingObject.energy*0.1;
+  hoverboardingObject.stylepoints = walkingObject.stylepoints*65;
+  return hoverboardingObject;
+});
+
+addMode("Leapfrogging", 'walking', function(walkingObject){
+	var leapfroggingObject = {};
+  leapfroggingObject.time = walkingObject.time*5.9;
+  leapfroggingObject.energy = walkingObject.energy*8.1;
+  leapfroggingObject.stylepoints = walkingObject.stylepoints*54;
+  return leapfroggingObject;
+});
+
+addMode("Wheelchair", 'walking', function(walkingObject){
+	var wheelchairObject = {};
+  wheelchairObject.time = walkingObject.time*2.9;
+  wheelchairObject.energy = walkingObject.energy*0;
+  walkingObject.stylepoints = walkingObject.stylepoints*12;
+  return wheelchairObject;
+});
+
 
 //start = start location as a string
 //destination =   end location as a string
