@@ -119,7 +119,7 @@ function getWalkingDirections(endPoints, request)
 	var mode = null;
 	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" 
   + endPoints["start"] + "&destination=" + endPoints["end"] + 
-  "&modewalking&key=" + APIKEY
+  "&mode=walking&key=" + APIKEY
 
 	request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
@@ -135,11 +135,11 @@ function getDrivingDirections(endPoints, request)
 	var mode = null;
 	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
   + endPoints["start"] + "&destination=" + endPoints["end"] + 
-  "&modedriving&key=" + APIKEY
+  "&mode=driving&key=" + APIKEY
 
   request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-      var mode = JSON.parse(body);
+       mode = JSON.parse(body);
     	console.log(mode["routes"][0]["legs"]);
     }
   });
@@ -151,11 +151,11 @@ function getBikingDirections(endPoints, request)
 	var mode = null;
 	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" 
   + endPoints["start"] + "&destination=" + endPoints["end"] + 
-  "&modebicycling&key=" + APIKEY
+  "&mode=bicycling&key=" + APIKEY
 
   request(apiUrl, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
-        var mode = JSON.parse(body);
+         mode = JSON.parse(body);
       	console.log(mode["routes"][0]["legs"]);
      	}
    });
