@@ -19,3 +19,23 @@ http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-exp
 app.get("/",function(req,res){
 	res.render('main');
 });
+
+walkingObject = {time, cost, energy, [directions]}
+
+
+function makeMode(name, baseMode, eval){
+  var obj = {'name': name,
+             'baseMode': baseMode,
+             'eval':eval};
+  return obj;
+}
+
+var modes = [
+  {name: "Cartwheel",
+   eval: function(walkingObject){
+     walkingObject.time = walkingObject.time*0.8;
+     walkingObject.energy = walkingObject.energy*2.5;
+   }
+  },
+
+]
