@@ -18,7 +18,7 @@ function getWalkingDirections(endPoints, request)
       var steps_list = mode["routes"][0]["legs"][0]["steps"];
       var output = {"total_time":total_time,"steps_list":steps_list};
       
-      console.log(output);
+    
    	}
   });
 	return output;
@@ -38,7 +38,7 @@ function getDrivingDirections(endPoints, request)
       var steps_list = mode["routes"][0]["legs"][0]["steps"];
       var output = {"total_time":total_time,"steps_list":steps_list};
       
-      console.log(output);
+      
    	}
   });
 	return output;
@@ -57,8 +57,7 @@ function getBikingDirections(endPoints, request)
       var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
       var steps_list = mode["routes"][0]["legs"][0]["steps"];
       var output = {"total_time":total_time,"steps_list":steps_list};
-      
-      console.log(output);
+   
    	}
   });
 	return output;
