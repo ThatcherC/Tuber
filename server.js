@@ -4,11 +4,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var endPoints = {};
-
-var modes = {"driving":"", "walking":"", "bicycling":""};
-
-//walkingObject = {time, cost, energy, [stylepoints],[directions]}
+const APIKEY = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
 var modeList = {};
+
+
 
 var app = express();
 app.use(express.static('static'));
@@ -19,10 +18,11 @@ app.listen(8080);
 
 //Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res, endPoints){
-  res.send(req.body);
-  endPoints = req.body;
+	// var modes = {"driving":"", "walking":"", "bicycling":""};
+	endPoints = req.body;
+	findBestMode(endPoints, null, null, null);
 
-
+<<<<<<< HEAD
   	// API retrieval
 
   	//Load the request module
@@ -43,6 +43,9 @@ app.post("/",function(req, res, endPoints){
     });
   	}
   	//Lets try to make a HTTP GET request to modulus.io's website.
+=======
+  res.send(req.body);
+>>>>>>> 1753418d944f38d869c009e7a6c73fe89ab05e95
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
@@ -60,10 +63,10 @@ function addMode(name, baseMode, eval){
 }
 
 
-// addMode("Cartwheeling", 'walking', function(walkingObject){
-//   walkingObject.time = walkingObject.time*0.7;
-//   walkingObject.energy = walkingObject.energy*2.5;
-// });
+addMode("Cartwheeling", 'walking', function(walkingObject){
+  walkingObject.time = walkingObject.time*0.7;
+  walkingObject.energy = walkingObject.energy*2.5;
+});
 
 addMode("Cartwheeling", 'walking', function(walkingObject){
   var cartwheelingObject = {};
@@ -73,11 +76,11 @@ addMode("Cartwheeling", 'walking', function(walkingObject){
   return cartwheelingObject;
 });
 
-addMode("Hoverboarding- Back to the Future Style", 'walking', function(walkingObject){
+addMode("Hoverboarding- Back to the Future Style", 'biking', function(bikingObject){
   var hoverboardingObject = {};
-  hoverboardingObject.time = walkingObject.time*0.7;
-  hoverboardingObject.energy = walkingObject.energy*0.1;
-  hoverboardingObject.stylepoints = walkingObject.stylepoints*65;
+  hoverboardingObject.time = bikingObject.time*0.7;
+  hoverboardingObject.energy = bikingObject.energy*0.1;
+  hoverboardingObject.stylepoints = bikingObject.stylepoints*65;
   return hoverboardingObject;
 });
 
@@ -97,29 +100,35 @@ addMode("Wheelchair", 'walking', function(walkingObject){
   return wheelchairObject;
 });
 
-
 //start = start location as a string
 //destination =   end location as a string
 //enabledModes = list of names of enabled modes as strings
 //optimizationParameter = "time", "cost", "energy", "style points"
 //optimizationDirection = "up","down"
 
-/*
-function findBestMode(start, destination, enabledModes, optimizationParameter, optimizationDirection){
-  walkingObject = getWalkingDirections();
-  drivingObject = getDrivingDirections();
+
+function findBestMode(endPoints,
+										  enabledModes,
+										  optimizationParameter,
+										  optimizationDirection)
+{
+	var request = require('request');
+  walkingObject = getWalkingDirections(endPoints, request);
+  drivingObject = getDrivingDirections(endPoints, request);
+  bikingObject = getBikingDirections(endPoints, request);
 
   var modeResults = [];
 
   for(var i = 0; i < enabledModes.length; i++){
     var object = {};
-    if(modeList[enabledModes[i]].baseMode == 'walking'){
+    if(modeList[enabledModes[i]].baseMode == 'walking') {
       object = JSON.parse(JSON.stringify(walkingObject));
-    }else if(modeList[enabledModes[i]].baseMode == 'driving'){
+    }
+    else if(modeList[enabledModes[i]].baseMode == 'driving') {
       object = JSON.parse(JSON.stringify(drivingObject));
     }else if(modeList[enabledModes[i]].baseMode == 'biking'){
       object = JSON.parse(JSON.stringify(drivingObject));
-    }else{
+    }else {
       //what TODO here? pass start and end lat/lng to object???
     }
     var result = modeList[enabledModes[i]].eval(object);
@@ -128,4 +137,51 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
 
   //sort modes by chosen paramter
 }
-*/
+
+function getWalkingDirections(endPoints, request)
+{
+	var mode = null;
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  + endPoints["start"] + "&destination=" + endPoints["end"] +
+  "&mode=walking&key=" + APIKEY
+
+	request(apiUrl, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+      mode = JSON.parse(body);
+    	console.log(mode["routes"][0]["legs"]);
+   	}
+  });
+	return mode;
+}
+
+function getDrivingDirections(endPoints, request)
+{
+	var mode = null;
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  + endPoints["start"] + "&destination=" + endPoints["end"] +
+  "&mode=driving&key=" + APIKEY
+
+  request(apiUrl, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+       mode = JSON.parse(body);
+    	console.log(mode["routes"][0]["legs"]);
+    }
+  });
+  return mode;
+}
+
+function getBikingDirections(endPoints, request)
+{
+	var mode = null;
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  + endPoints["start"] + "&destination=" + endPoints["end"] +
+  "&mode=bicycling&key=" + APIKEY
+
+  request(apiUrl, function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+         mode = JSON.parse(body);
+      	console.log(mode["routes"][0]["legs"]);
+     	}
+   });
+  return mode;
+}
