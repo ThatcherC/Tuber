@@ -11,11 +11,14 @@ class Mode():
         self.eval_function = eval_function
         self.enabled = enabled
 
-    def get_display_name():
+    def set_display_name(self,display_name):
+	self.display_name = display_name
+
+    def get_display_name(self):
         return self.display_name
 
-    def enable():
+    def enable(self, enabled):
         self.enabled = enabled
 
-    def is_enabled():
+    def is_enabled(self):
         return self.enabled
