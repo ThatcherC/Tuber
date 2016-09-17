@@ -5,8 +5,9 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var endPoints = {};
 
+var modes = {"driving":"", "walking":"", "bicycling":""};
 
-//walkingObject = {time, cost, energy, [directions]}
+//walkingObject = {time, cost, energy, [stylepoints],[directions]}
 var modeList = {};
 
 var app = express();
@@ -22,19 +23,26 @@ app.post("/",function(req, res, endPoints){
   endPoints = req.body;
 
 
-  // API retrieval
+  	// API retrieval
 
-  //Load the request module
-  var request = require('request');
-  var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
-  var apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" + endPoints["start"] + "&destination=" + endPoints["end"] + "&key=" + apiKey
+  	//Load the request module
+  	var request = require('request');
+  	var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
+  	var apiUrl = "";
 
-  //Lets try to make a HTTP GET request to modulus.io's website.
-  request(apiUrl, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-          console.log(body); // Show the HTML for the body.
-      }
+  	for (int i = 0; i < 3; i++) {
+  		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" 
+  		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" + 
+  		mode + "&key=" + apiKey
+  		var keys = Object.keys(modes)
+  		request(apiUrl, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+        	modes[keys[i]] = JSON.parse(body);
+      		console.log(modes[keys[i]["routes"][0]["legs"]]);
+     	}
     });
+  	}
+  	//Lets try to make a HTTP GET request to modulus.io's website.
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
@@ -51,10 +59,44 @@ function addMode(name, baseMode, eval){
   modeList[name] = obj;
 }
 
+
+// addMode("Cartwheeling", 'walking', function(walkingObject){
+//   walkingObject.time = walkingObject.time*0.7;
+//   walkingObject.energy = walkingObject.energy*2.5;
+// });
+
 addMode("Cartwheeling", 'walking', function(walkingObject){
-  walkingObject.time = walkingObject.time*0.7;
-  walkingObject.energy = walkingObject.energy*2.5;
+  var cartwheelingObject = {};
+  cartwheelingObject.time = walkingObject.time*2.4;
+  cartwheelingObject.energy = walkingObject.energy*2.5;
+  cartwheelingObject.stylepoints = walkingObject.stylepoints*21;
+  return cartwheelingObject;
 });
+
+addMode("Hoverboarding- Back to the Future Style", 'walking', function(walkingObject){
+  var hoverboardingObject = {};
+  hoverboardingObject.time = walkingObject.time*0.7;
+  hoverboardingObject.energy = walkingObject.energy*0.1;
+  hoverboardingObject.stylepoints = walkingObject.stylepoints*65;
+  return hoverboardingObject;
+});
+
+addMode("Leapfrogging", 'walking', function(walkingObject){
+	var leapfroggingObject = {};
+  leapfroggingObject.time = walkingObject.time*5.9;
+  leapfroggingObject.energy = walkingObject.energy*8.1;
+  leapfroggingObject.stylepoints = walkingObject.stylepoints*54;
+  return leapfroggingObject;
+});
+
+addMode("Wheelchair", 'walking', function(walkingObject){
+	var wheelchairObject = {};
+  wheelchairObject.time = walkingObject.time*2.9;
+  wheelchairObject.energy = walkingObject.energy*0;
+  walkingObject.stylepoints = walkingObject.stylepoints*12;
+  return wheelchairObject;
+});
+
 
 //start = start location as a string
 //destination =   end location as a string
@@ -85,3 +127,4 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
   //sort modes by chosen paramter
 }
 */
+
