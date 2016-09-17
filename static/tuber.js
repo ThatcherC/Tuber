@@ -8,3 +8,11 @@ function initializeMap(){
           zoom: 13
         });
 }
+
+function setStart(){
+
+}
+
+function setDestination(){
+  
+}
