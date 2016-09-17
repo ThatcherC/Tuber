@@ -44,6 +44,7 @@ addMode("Cartwheeling", 'walking', function(walkingObject){
 //enabledModes = list of names of enabled modes as strings
 //optimizationParameter = "time", "cost", "energy", "style points"
 //optimizationDirection = "up","down"
+
 /*
 function findBestMode(start, destination, enabledModes, optimizationParameter, optimizationDirection){
   walkingObject = getWalkingDirections();
@@ -52,7 +53,15 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
   var modeResults = [];
 
   for(var i = 0; i < enabledModes.length; i++){
-    var result = modeList[enabledModes[i]].eval();
+    var object = {};
+    if(modeList[enabledModes[i]].baseMode == 'walking'){
+      object = JSON.parse(JSON.stringify(walkingObject));
+    }else if(modeList[enabledModes[i]].baseMode == 'driving'){
+      object = JSON.parse(JSON.stringify(drivingObject));
+    }else{
+      //what TODO here? pass start and end lat/lng to object???
+    }
+    var result = modeList[enabledModes[i]].eval(object);
     modeResults[i] = result;
   }
 
