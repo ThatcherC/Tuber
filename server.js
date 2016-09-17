@@ -88,5 +88,3 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
 }
 */
 
-
- 
