@@ -12,11 +12,6 @@ function addMode(name, baseMode, eval){
 
 
 addMode("Cartwheeling", 'walking', function(walkingObject){
-  walkingObject.time = walkingObject.time*0.7;
-  walkingObject.energy = walkingObject.energy*2.5;
-});
-
-addMode("Cartwheeling", 'walking', function(walkingObject){
   var cartwheelingObject = {};
   cartwheelingObject.time = walkingObject.time*5.4;
   cartwheelingObject.energy = walkingObject.energy*12.5;

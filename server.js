@@ -18,31 +18,9 @@ app.listen(8080);
 
 //Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res, endPoints){
-	// var modes = {"driving":"", "walking":"", "bicycling":""};
 	endPoints = req.body;
 	//findBestMode(endPoints, null, null, null);
-
-
-	// API retrieval
-
-	//Load the request module
-	var request = require('request');
-	var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
-	var apiUrl = "";
-
-	for (var i = 0; i < 3; i++) {
-		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
-		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" +
-		mode + "&key=" + apiKey
-		var keys = Object.keys(modes)
-		request(apiUrl, function (error, response, body) {
-    	  if (!error && response.statusCode == 200) {
-          	modes[keys[i]] = JSON.parse(body);
-        		console.log(modes[keys[i]["routes"][0]["legs"]]);
-       	}
-      });
-	}
-  res.send(req.body);
+	res.send(req.body);
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
@@ -50,8 +28,7 @@ app.get("/",function(req,res){
 	res.render('main');
 });
 
-//start = start location as a string
-//destination =   end location as a string
+//endPoints = contains the starting and destination locations
 //enabledModes = list of names of enabled modes as strings
 //optimizationParameter = "time", "cost", "energy", "style points"
 //optimizationDirection = "up","down"
@@ -78,10 +55,9 @@ function findBestMode(endPoints,
       object = JSON.parse(JSON.stringify(drivingObject));
     }else {
       //what TODO here? pass start and end lat/lng to object???
+      // TODO pass lat/long and (prob) distance to object
     }
     var result = modeList[enabledModes[i]].eval(object);
     modeResults[i] = result;
   }
-
-  //sort modes by chosen paramter
 }
