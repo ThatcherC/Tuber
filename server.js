@@ -47,8 +47,8 @@ addMode("Cartwheeling", 'walking', function(walkingObject){
 
 addMode("Cartwheeling", 'walking', function(walkingObject){
   var cartwheelingObject = {};
-  cartwheelingObject.time = walkingObject.time*2.4;
-  cartwheelingObject.energy = walkingObject.energy*2.5;
+  cartwheelingObject.time = walkingObject.time*5.4;
+  cartwheelingObject.energy = walkingObject.energy*12.5;
   cartwheelingObject.stylepoints = walkingObject.stylepoints*21;
   return cartwheelingObject;
 });
@@ -75,6 +75,22 @@ addMode("Wheelchair", 'walking', function(walkingObject){
   wheelchairObject.energy = walkingObject.energy*0;
   walkingObject.stylepoints = walkingObject.stylepoints*12;
   return wheelchairObject;
+});
+
+addMode("Skateboarding", 'walking', function(walkingObject){
+  var skateboardingObject = {};
+  skateboardingObject.time = bikingObject.time*1.7;
+  skateboardingObject.energy = bikingObject.energy*2.6;
+  skateboardingObject.stylepoints = bikingObject.stylepoints*15;
+  return skateboardingObject;
+});
+
+addMode("Golfcarting", 'biking', function(walkingObject){
+  var golfcartingObject = {};
+  golfcartingObject.time = bikingObject.time*1.7;
+  golfcartingObject.energy = bikingObject.energy*2.6;
+  golfcartingObject.stylepoints = bikingObject.stylepoints*15;
+  return golfcartingObject;
 });
 
 //start = start location as a string
