@@ -53,11 +53,11 @@ addMode("Cartwheeling", 'walking', function(walkingObject){
   return cartwheelingObject;
 });
 
-addMode("Hoverboarding- Back to the Future Style", 'walking', function(walkingObject){
+addMode("Hoverboarding- Back to the Future Style", 'biking', function(bikingObject){
   var hoverboardingObject = {};
-  hoverboardingObject.time = walkingObject.time*0.7;
-  hoverboardingObject.energy = walkingObject.energy*0.1;
-  hoverboardingObject.stylepoints = walkingObject.stylepoints*65;
+  hoverboardingObject.time = bikingObject.time*0.7;
+  hoverboardingObject.energy = bikingObject.energy*0.1;
+  hoverboardingObject.stylepoints = bikingObject.stylepoints*65;
   return hoverboardingObject;
 });
 
@@ -76,7 +76,6 @@ addMode("Wheelchair", 'walking', function(walkingObject){
   walkingObject.stylepoints = walkingObject.stylepoints*12;
   return wheelchairObject;
 });
-
 
 //start = start location as a string
 //destination =   end location as a string

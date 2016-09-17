@@ -4,30 +4,31 @@
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script type="text/javascript" src="tuber.js"></script>
+  <script src="https://use.fontawesome.com/b979f7ff47.js"></script>
+  <title>Toober Navigation</title>
 </head>
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-4">
         <h1>Tuber</h1>
 
         <form action="/" method="post">
 
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Start</label>
-            <div class="col-sm-9">
-              <input class="form-control" name="start" id="startLocation" onchange="">
+          <div class="form-inline">
+            <div class="form-group">
+              <label class="control-label">Start</label>
+              <input class="form-control" name="start" id="startLocation">
+              <button class="btn btn-default" type="button" onclick="setStart();"><i class="fa fa-crosshairs fa-5" aria-hidden="true"></i></button>
             </div>
           </div>
-        </br>
+          </br>
 
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Destination</label>
-            <div class="col-sm-6">
-              <input class="form-control" name="end" id="endLocation" onchange="">
-            </div>
-            <div class="col-sm-3">
-              <button class="btn btn-default" onpress="">Set Location</button>
+          <div class="form-inline">
+            <div class="form-group">
+              <label class="control-label">Destination</label>
+              <input class="form-control" name="end" id="endLocation">
+              <button class="btn btn-default" type="button" onclick="setDestination();"><i class="fa fa-crosshairs fa-5" aria-hidden="true"></i></button>
             </div>
           </div>
           </br>
@@ -52,7 +53,7 @@
         </form>
 
       </div>
-      <div class="col-lg-9"><div style="height:100%" id="gmap">Map didn't load</div></div>
+      <div class="col-lg-8"><div style="height:100%" id="gmap">Map didn't load</div></div>
     </div>
   </div>
   <script async defer
