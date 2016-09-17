@@ -31,8 +31,8 @@ app.post("/",function(req, res, endPoints){
   	var apiUrl = "";
 
   	for (int i = 0; i < 3; i++) {
-  		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" 
-  		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" + 
+  		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" +
   		mode + "&key=" + apiKey
   		var keys = Object.keys(modes)
   		request(apiUrl, function (error, response, body) {
@@ -117,6 +117,8 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
       object = JSON.parse(JSON.stringify(walkingObject));
     }else if(modeList[enabledModes[i]].baseMode == 'driving'){
       object = JSON.parse(JSON.stringify(drivingObject));
+    }else if(modeList[enabledModes[i]].baseMode == 'biking'){
+      object = JSON.parse(JSON.stringify(drivingObject));
     }else{
       //what TODO here? pass start and end lat/lng to object???
     }
@@ -127,4 +129,3 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
   //sort modes by chosen paramter
 }
 */
-
