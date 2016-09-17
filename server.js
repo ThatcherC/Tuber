@@ -15,16 +15,18 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.listen(8080);
 
+//Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res){
   res.send(req.body);
 });
 
-http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
+//http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
 app.get("/",function(req,res){
 	res.render('main');
 });
 
-
+//Creates a new mode with a name, a base mode (walking, driving, or other),
+//and a function to modify the base mode.
 function addMode(name, baseMode, eval){
   var obj = {'name': name,
              'baseMode': baseMode,
