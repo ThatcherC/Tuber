@@ -21,7 +21,26 @@ app.post("/",function(req, res, endPoints){
 	// var modes = {"driving":"", "walking":"", "bicycling":""};
 	endPoints = req.body;
 	findBestMode(endPoints, null, null, null);
+  	// API retrieval
 
+  	//Load the request module
+  	var request = require('request');
+  	var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
+  	var apiUrl = "";
+
+  	for (int i = 0; i < 3; i++) {
+  		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" +
+  		mode + "&key=" + apiKey
+  		var keys = Object.keys(modes)
+  		request(apiUrl, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+        	modes[keys[i]] = JSON.parse(body);
+      		console.log(modes[keys[i]["routes"][0]["legs"]]);
+     	}
+    });
+  	}
+  	//Lets try to make a HTTP GET request to modulus.io's website.
   res.send(req.body);
 });
 
@@ -84,10 +103,10 @@ addMode("Wheelchair", 'walking', function(walkingObject){
 //optimizationDirection = "up","down"
 
 
-function findBestMode(endPoints, 
-										  enabledModes, 
-										  optimizationParameter, 
-										  optimizationDirection) 
+function findBestMode(endPoints,
+										  enabledModes,
+										  optimizationParameter,
+										  optimizationDirection)
 {
 	var request = require('request');
   walkingObject = getWalkingDirections(endPoints, request);
@@ -103,8 +122,9 @@ function findBestMode(endPoints,
     }
     else if(modeList[enabledModes[i]].baseMode == 'driving') {
       object = JSON.parse(JSON.stringify(drivingObject));
-    }
-    else {
+    }else if(modeList[enabledModes[i]].baseMode == 'biking'){
+      object = JSON.parse(JSON.stringify(drivingObject));
+    }else {
       //what TODO here? pass start and end lat/lng to object???
     }
     var result = modeList[enabledModes[i]].eval(object);
@@ -161,4 +181,3 @@ function getBikingDirections(endPoints, request)
    });
   return mode;
 }
-
