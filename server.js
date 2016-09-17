@@ -31,8 +31,8 @@ app.post("/",function(req, res, endPoints){
 
   //Lets try to make a HTTP GET request to modulus.io's website.
   request(apiUrl, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-          console.log(body); // Show the HTML for the body.
+  //    if (!error && response.statusCode == 200) {
+         // console.log(body); // Show the HTML for the body.
        
       }
       directions_data = JSON.parse(body);
