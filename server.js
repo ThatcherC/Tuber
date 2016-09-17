@@ -20,7 +20,7 @@ app.listen(8080);
 app.post("/",function(req, res, endPoints){
 	// var modes = {"driving":"", "walking":"", "bicycling":""};
 	endPoints = req.body;
-	findBestMode(endPoints, null, null, null);
+	//findBestMode(endPoints, null, null, null);
 
 
   	// API retrieval
@@ -52,9 +52,6 @@ app.post("/",function(req, res, endPoints){
 app.get("/",function(req,res){
 	res.render('main');
 });
-
-
-console.log(modes.modeList);
 
 //start = start location as a string
 //destination =   end location as a string
