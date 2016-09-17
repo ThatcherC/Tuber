@@ -1,0 +1,25 @@
+{
+  "name": "tuber",
+  "version": "1.0.0",
+  "description": "Navigation system for unusual methods of transportation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThatcherC/Tuber.git"
+  },
+  "author": "TRNT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThatcherC/Tuber/issues"
+  },
+  "homepage": "https://github.com/ThatcherC/Tuber#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0"
+  }
+}
