@@ -34,10 +34,11 @@ app.post("/",function(req, res, endPoints){
   //    if (!error && response.statusCode == 200) {
          // console.log(body); // Show the HTML for the body.
        
-      }
+    //  }
       directions_data = JSON.parse(body);
       console.log(directions_data);
     });
+    
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
