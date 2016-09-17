@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.listen(8080);
 
 app.post("/",function(req, res){
-  console.log(req.body);
+  res.send(req.body);
 });
 
 http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
