@@ -4,6 +4,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 
+
+//walkingObject = {time, cost, energy, [directions]}
+var modeList = {};
+
 var app = express();
 app.use(express.static('static'));
 app.use(bodyParser.json()); // support json encoded bodies
@@ -20,22 +24,36 @@ app.get("/",function(req,res){
 	res.render('main');
 });
 
-walkingObject = {time, cost, energy, [directions]}
 
-
-function makeMode(name, baseMode, eval){
+function addMode(name, baseMode, eval){
   var obj = {'name': name,
              'baseMode': baseMode,
              'eval':eval};
-  return obj;
+  modeList[name] = obj;
 }
 
-var modes = [
-  {name: "Cartwheel",
-   eval: function(walkingObject){
-     walkingObject.time = walkingObject.time*0.8;
-     walkingObject.energy = walkingObject.energy*2.5;
-   }
-  },
+addMode("Cartwheeling", 'walking', function(walkingObject){
+  walkingObject.time = walkingObject.time*0.7;
+  walkingObject.energy = walkingObject.energy*2.5;
+});
 
-]
+//start = start location as a string
+//destination =   end location as a string
+//enabledModes = list of names of enabled modes as strings
+//optimizationParameter = "time", "cost", "energy", "style points"
+//optimizationDirection = "up","down"
+/*
+function findBestMode(start, destination, enabledModes, optimizationParameter, optimizationDirection){
+  walkingObject = getWalkingDirections();
+  drivingObject = getDrivingDirections();
+
+  var modeResults = [];
+
+  for(var i = 0; i < enabledModes.length; i++){
+    var result = modeList[enabledModes[i]].eval();
+    modeResults[i] = result;
+  }
+
+  //sort modes by chosen paramter
+}
+*/
