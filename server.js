@@ -3,6 +3,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var request = require('request');
 
 var apis = require("./apis");
 var modes = require("./modes");
@@ -23,25 +24,6 @@ app.post("/",function(req, res, endPoints){
 	//findBestMode(endPoints, null, null, null);
 
 
-	// API retrieval
-
-	//Load the request module
-	var request = require('request');
-	var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
-	var apiUrl = "";
-
-	for (var i = 0; i < 3; i++) {
-		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
-		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" +
-		mode + "&key=" + apiKey
-		var keys = Object.keys(modes)
-		request(apiUrl, function (error, response, body) {
-    	  if (!error && response.statusCode == 200) {
-          	modes[keys[i]] = JSON.parse(body);
-        		console.log(modes[keys[i]["routes"][0]["legs"]]);
-       	}
-      });
-	}
   res.send(req.body);
 });
 
