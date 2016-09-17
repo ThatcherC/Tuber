@@ -4,7 +4,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var endPoints = {};
-var directions_data = "";
+
+var modes = {"driving":"", "walking":"", "bicycling":""};
 
 //walkingObject = {time, cost, energy, [directions]}
 var modeList = {};
@@ -27,17 +28,21 @@ app.post("/",function(req, res, endPoints){
   	//Load the request module
   	var request = require('request');
   	var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
-  	var apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" + endPoints["start"] + "&destination=" + endPoints["end"] + "&key=" + apiKey
+  	var apiUrl = "";
 
-  	//Lets try to make a HTTP GET request to modulus.io's website.
-	request(apiUrl, function (error, response, body) {
+  	for (int i = 0; i < 3; i++) {
+  		apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" 
+  		+ endPoints["start"] + "&destination=" + endPoints["end"] + "&mode" + 
+  		mode + "&key=" + apiKey
+  		var keys = Object.keys(modes)
+  		request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-         // console.log(body); // Show the HTML for the body.
-       
+        	modes[keys[i]] = JSON.parse(body);
+      		console.log(modes[keys[i]["routes"][0]["legs"]]);
      	}
-      	directions_data = JSON.parse(body);
-      	console.log(directions_data["routes"][0]["legs"]);
     });
+  	}
+  	//Lets try to make a HTTP GET request to modulus.io's website.
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
@@ -54,10 +59,10 @@ function addMode(name, baseMode, eval){
   modeList[name] = obj;
 }
 
-addMode("Cartwheeling", 'walking', function(walkingObject){
-  walkingObject.time = walkingObject.time*0.7;
-  walkingObject.energy = walkingObject.energy*2.5;
-});
+// addMode("Cartwheeling", 'walking', function(walkingObject){
+//   walkingObject.time = walkingObject.time*0.7;
+//   walkingObject.energy = walkingObject.energy*2.5;
+// });
 
 //start = start location as a string
 //destination =   end location as a string
