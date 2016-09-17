@@ -4,7 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var endPoints = {};
-
+var directions_data = "";
 
 //walkingObject = {time, cost, energy, [directions]}
 var modeList = {};
@@ -33,7 +33,10 @@ app.post("/",function(req, res, endPoints){
   request(apiUrl, function (error, response, body) {
       if (!error && response.statusCode == 200) {
           console.log(body); // Show the HTML for the body.
+       
       }
+      directions_data = JSON.parse(body);
+      console.log(directions_data);
     });
 });
 
