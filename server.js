@@ -22,7 +22,7 @@ app.post("/",function(req, res, endPoints){
 	endPoints = req.body;
 	findBestMode(endPoints, null, null, null);
 
-<<<<<<< HEAD
+
   	// API retrieval
 
   	//Load the request module
@@ -43,9 +43,9 @@ app.post("/",function(req, res, endPoints){
     });
   	}
   	//Lets try to make a HTTP GET request to modulus.io's website.
-=======
+
   res.send(req.body);
->>>>>>> 1753418d944f38d869c009e7a6c73fe89ab05e95
+
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
