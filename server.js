@@ -20,23 +20,21 @@ app.listen(8080);
 app.post("/",function(req, res, endPoints){
   res.send(req.body);
   endPoints = req.body;
-  
-  
-// API retrieval
 
-//Load the request module
-var request = require('request');
 
-var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
+  // API retrieval
 
-var apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" + endPoints["start"] + "&destination=" + endPoints["end"] + "&key=" + apiKey
+  //Load the request module
+  var request = require('request');
+  var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
+  var apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" + endPoints["start"] + "&destination=" + endPoints["end"] + "&key=" + apiKey
 
-//Lets try to make a HTTP GET request to modulus.io's website.
-request(apiUrl, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log(body); // Show the HTML for the body.
-    }
-});
+  //Lets try to make a HTTP GET request to modulus.io's website.
+  request(apiUrl, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+          console.log(body); // Show the HTML for the body.
+      }
+    });
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
@@ -87,6 +85,3 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
   //sort modes by chosen paramter
 }
 */
-
-
- 
