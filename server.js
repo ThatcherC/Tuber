@@ -3,6 +3,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var endPoints = {};
 
 
 //walkingObject = {time, cost, energy, [directions]}
@@ -16,8 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.listen(8080);
 
 //Receives post data from the browser. Data is stored in the object req.body
-app.post("/",function(req, res){
+app.post("/",function(req, res, endPoints){
   res.send(req.body);
+  endPoints = req.body;
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
@@ -68,3 +70,21 @@ function findBestMode(start, destination, enabledModes, optimizationParameter, o
   //sort modes by chosen paramter
 }
 */
+
+
+// API retrieval
+
+//Load the request module
+var request = require('request');
+
+var apiKey = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
+
+var apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=" + endPoints["start"] + "&destination=" + endPoints["end"] + "&key=" + apiKey
+
+//Lets try to make a HTTP GET request to modulus.io's website.
+request(apiUrl, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log(body); // Show the HTML for the body.
+    }
+});
+ 
