@@ -28,7 +28,22 @@ function initializeMap(){
     label: "Start Point",
     draggable: true
   });
+  console.log(fullDirectionsData);
 }
+
+function populateDirections(modeName){
+  var steps = fullDirectionsData[modeName].steps_list;
+  var htmlString = '<div class="panel panel-default"><div class="panel-heading">Directions</div>';
+  htmlString += '<div class="panel-body">'
+  for(var i = 0; i < steps.length; i++){
+    htmlString += steps[i].html_instructions+"</br>";
+    console.log(steps[i]);
+  }
+  htmlString += "</div></div>"
+  console.log(htmlString);
+  document.getElementById("directionZones").innerHTML = htmlString;
+}
+
 
 function setStart(){
   var center = map.getCenter();
