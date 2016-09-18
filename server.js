@@ -18,8 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.listen(8080);
 
 //Receives post data from the browser. Data is stored in the object req.body
-app.post("/",function(req, res, endPoints){
-	endPoints = req.body;
+app.post("/",function(req, res){
+	var endPoints = req.body;
 	findBestMode(endPoints, null, null, null);
 	res.send(req.body);
 	// var modes = {"driving":"", "walking":"", "bicycling":""};
