@@ -61,6 +61,37 @@ addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
   return golfcartingObject;
 });
 
+addMode("airplane", "Airplane", 'other', function(walkingObject){
+  var airplaneObject = {};
+  var speed = 250;
+  var directDistance = calcStraightDist(apis.retrieveStartCoords(walkingObject),apis.retrieveEndCoords(walkingObject));
+
+  airplaneObject.time = directDistance/speed;
+  airplaneObject.energy = 0;
+  airplaneObject.stylepoints = /*depends on the type of plane*/;
+  return airplaneObject;
+});
+
+function calcStraightDist(startcoords, endcoords) {
+  var R = 6371e3; // metres
+    var lat1 = startcoords["lat"]
+    var lat2 = endcoords["lat"]
+    var lon1 = startcoords["lng"]
+    var lon2 = startcoords["lng"]
+    var φ1 = lat1.toRadians();
+    var φ2 = lat2.toRadians();
+    var Δφ = (lat2-lat1).toRadians();
+    var Δλ = (lon2-lon1).toRadians();
+
+    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+            Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    var d = R * c;
+    return d
+}
+
 module.exports = {
   modeList: modeList
 }
