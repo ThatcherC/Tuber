@@ -13,8 +13,6 @@ function addMode(shortName, displayName, baseMode, eval){
   modeList[shortName] = obj;
 }
 
-
-
 addMode("biking", "Biking", 'biking', function(bikingObject){
   var bikingObject = JSON.parse(JSON.stringify(bikingObject));
   bikingObject.time = bikingObject.time*1.0;
@@ -40,12 +38,13 @@ addMode("driving", "Driving", 'driving', function(drivingObject){
 });
 
 addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
-  var cartwheelingObject = JSON.parse(JSON.stringify(walkingObject));;
+  var cartwheelingObject = JSON.parse(JSON.stringify(walkingObject));
   cartwheelingObject.time = walkingObject.time*5.4;
   cartwheelingObject.energy = walkingObject.energy*12.5;
   cartwheelingObject.stylepoints = walkingObject.stylepoints*.21;
   return cartwheelingObject;
 });
+
 
 addMode("hoverboarding1","Hoverboarding", 'biking', function(bikingObject){
   var hoverboardingObject = JSON.parse(JSON.stringify(bikingObject));;
@@ -70,6 +69,7 @@ addMode("leapfrogging", "Leapfrogging", 'walking', function(walkingObject){
   leapfroggingObject.stylepoints = walkingObject.stylepoints*.54;
   return leapfroggingObject;
 });
+
 
 addMode("wheelchair","Wheelchair", 'walking', function(walkingObject){
 	var wheelchairObject = JSON.parse(JSON.stringify(walkingObject));;
@@ -98,19 +98,18 @@ addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
 addMode("airplane", "Airplane", 'other', function(walkingObject){
   var airplaneObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = 250;
-  console.log(walkingObject)
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
 
   airplaneObject.time = directDistance/speed;
   airplaneObject.energy = 0;
-  airplaneObject.stylepoints = 1;/*depends on the type of plane*/
+  airplaneObject.stylepoints = 5*(airplaneObject.time);/*depends on the type of plane*/
   return airplaneObject;
 });
+
 
 addMode("qm", "Quantum Mechanical Tunneling", 'other', function(walkingObject){
   var qmObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = Infinity;
-  console.log(walkingObject)
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
 
   qmObject.time = 0;
