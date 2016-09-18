@@ -10,7 +10,7 @@ function getWalkingDirections(endPoints, callback)
 	var mode = null;
 	var walking_energy_p_sec = .05;
 	var walking_style_p_sec = 1;
-	callAPI(endPoints, callback);
+	callAPI(endPoints, callback, walking_energy_p_sec, walking_style_p_sec);
 }
 
 function getDrivingDirections(endPoints, callback)
@@ -18,7 +18,7 @@ function getDrivingDirections(endPoints, callback)
 	var mode = null;
 	var driving_energy_p_sec = .01;
 	var driving_style_p_sec = 1;
-	callAPI(endPoints, callback);
+	callAPI(endPoints, callback, driving_energy_p_sec, driving_style_p_sec);
 }
 
 function getBikingDirections(endPoints, callback)
@@ -26,11 +26,10 @@ function getBikingDirections(endPoints, callback)
 	var mode = null;
 	var biking_energy_p_sec = .14;
 	var biking_style_p_sec = 1;
-  callAPI(endPoints, callback);
-	
+  callAPI(endPoints, callback, biking_energy_p_sec, biking_style_p_sec);
 }
 
-function callAPI(endPoints, callback)
+function callAPI(endPoints, callback, energy_p_sec, style_p_sec)
 {
   apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
   + endPoints["start"] + "&destination=" + endPoints["end"] +

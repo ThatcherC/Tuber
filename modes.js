@@ -1,4 +1,23 @@
+/* modes.js */
 var apis = require("./apis");
+
+/* Mode info */
+var baseModeInitInfo = {
+  "Cartwheeling":{
+    "shortName":"cartwheeling",
+    "baseMode":"walking",
+    "scaleFactors":{
+      "baseMode":"walkingObject",
+      "time":5.4,
+      "energy":12.5,
+      "stylepoints":21
+    }
+  },
+  "Hoverboarding- Back to the Future Style":{
+    
+  }
+}
+
 
 var modeList = {};
 var request = require('request');
