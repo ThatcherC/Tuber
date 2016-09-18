@@ -5,6 +5,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script type="text/javascript" src="tuber.js"></script>
   <script src="https://use.fontawesome.com/b979f7ff47.js"></script>
+  <script>
+    var fullDirectionsData = <%- dataAsString %>;
+  </script>
   <title>Toober Navigation</title>
 </head>
 <body>
@@ -62,31 +65,37 @@
           </div>
         </form>
 
-        <!-- results -->
-        <% if(results != null){ %>
-          <div class="panel panel-default">
-            <div class="panel-heading">Results</div>
+        <div style="overflow-y:scroll; height = 100px">
+          <!-- results -->
+          <% if(results != null){ %>
+            <div class="panel panel-default">
+              <div class="panel-heading">Results</div>
 
-            <% var resultKeys = Object.keys(results); %>
-            <table class="table table-hover">
-              <tr>
-                <th>Mode</th>
-                <th>Time</th>
-                <th>Energy</th>
-                <th>Style Points</th>
-              </tr>
-            <% resultKeys.forEach(function(key){ %>
-              <% var mode = results[key]; %>
-              <tr>
-                <td> <%= key %> </td>
-                <td> <%= mode.time.toFixed(0) %>s </td>
-                <td> <%= mode.energy.toFixed(1) %> kcal </td>
-                <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
-              </tr>
-            <% }); %>
-            </table>
+              <% var resultKeys = Object.keys(results); %>
+              <table class="table table-hover">
+                <tr>
+                  <th>Mode</th>
+                  <th>Time</th>
+                  <th>Energy</th>
+                  <th>Style Points</th>
+                </tr>
+              <% resultKeys.forEach(function(key){ %>
+                <% var mode = results[key]; %>
+                <tr>
+                  <td> <%= key %> </td>
+                  <td> <%= mode.time.toFixed(0) %>s </td>
+                  <td> <%= mode.energy.toFixed(1) %> kcal </td>
+                  <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
+                </tr>
+              <% }); %>
+              </table>
+            </div>
+          <% } %>
+          <!--directions-->
+          <div id="directionZones">
           </div>
-        <% } %>
+
+        </div>
 
       </div>
       <div class="col-lg-8"><div style="height:100%" id="gmap">Map didn't load</div></div>
