@@ -1,5 +1,4 @@
 var apis = require("./apis");
-
 var modeList = {};
 var request = require('request');
 
@@ -95,7 +94,7 @@ addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
   return golfcartingObject;
 });
 
-addMode("airplane", "Airplane", 'other', function(walkingObject){
+addMode("airplane", "Airplane", 'walking', function(walkingObject){
   var airplaneObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = 250;
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
@@ -107,7 +106,7 @@ addMode("airplane", "Airplane", 'other', function(walkingObject){
 });
 
 
-addMode("qm", "Quantum Mechanical Tunneling", 'other', function(walkingObject){
+addMode("qm", "Quantum Mechanical Tunneling", 'walking', function(walkingObject){
   var qmObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = Infinity;
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
@@ -118,17 +117,20 @@ addMode("qm", "Quantum Mechanical Tunneling", 'other', function(walkingObject){
   return qmObject;
 });
 
+function toRadians(Value) {
+  return Value * Math.PI / 180;
 
+}
 function calcStraightDist(start_coords, end_coords) {
   var R = 6371e3; // metres
     var lat1 = start_coords["lat"]
     var lat2 = end_coords["lat"]
     var lon1 = start_coords["lng"]
     var lon2 = start_coords["lng"]
-    var φ1 = lat1.toRadians();
-    var φ2 = lat2.toRadians();
-    var Δφ = (lat2-lat1).toRadians();
-    var Δλ = (lon2-lon1).toRadians();
+    var φ1 = toRadians(lat1);
+    var φ2 = toRadians(lat2);
+    var Δφ = toRadians(lat2-lat1);
+    var Δλ = toRadians(lon2-lon1);
 
     var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
             Math.cos(φ1) * Math.cos(φ2) *
