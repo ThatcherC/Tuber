@@ -69,6 +69,7 @@ function findBestMode(endPoints,
           }else if(modes.modeList[enabledModes[i]].baseMode == 'biking'){
             object = JSON.parse(JSON.stringify(drivingObject));
           }else {
+<<<<<<< HEAD
 	    			object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
             //what TODO here? pass start and end lat/lng to object???
 
@@ -77,13 +78,25 @@ function findBestMode(endPoints,
           var result = modes.modeList[enabledModes[i]].eval(object);
 	        var modeName = modes.modeList[enabledModes[i]].displayName;
 	        modeResults[modeName] = result;
+=======
+            object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
+          }
+          var result = modes.modeList[enabledModes[i]].eval(object);
+          var modeName = modes.modeList[enabledModes[i]].displayName;
+          modeResults[modeName] = result;
+>>>>>>> 1b1772610c043251cc23b9c2586f4d451659fcbc
         }
 
 				var unsorted_parameters = [];
 				var unsorted_names = [];
 				for (x in modeResults) {
+<<<<<<< HEAD
 				  unsorted_names.push(x);
 	   	 		unsorted_parameters.push(modeResults[x][optimizationParameter]);
+=======
+  			  unsorted_names.push(x);
+     	 		unsorted_parameters.push(modeResults[x][optimizationParameter]);
+>>>>>>> 1b1772610c043251cc23b9c2586f4d451659fcbc
 				}
 
 				var sorted_parameters = JSON.parse(JSON.stringify(unsorted_parameters)).sort(function(a,b) { return a - b; });
@@ -98,6 +111,7 @@ function findBestMode(endPoints,
 					}
 				}
 
+<<<<<<< HEAD
         //return sorted_names;
 				var newModeResults = {};
 				for(var i= 0; i < sorted_parameters.length; i++){
@@ -106,6 +120,9 @@ function findBestMode(endPoints,
 
 
         callback(newModeResults);
+=======
+        callback(modeResults);
+>>>>>>> 1b1772610c043251cc23b9c2586f4d451659fcbc
         //sort modes by chosen paramter
 
       });

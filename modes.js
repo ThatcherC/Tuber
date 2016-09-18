@@ -14,7 +14,7 @@ var baseModeInitInfo = {
     }
   },
   "Hoverboarding- Back to the Future Style":{
-    
+
   }
 }
 
