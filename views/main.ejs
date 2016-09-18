@@ -4,7 +4,7 @@
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script type="text/javascript" src="tuber.js"></script>
-  <script src="https://use.fontawesome.com/b979f7ff47.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
     var fullDirectionsData = <%- dataAsString %>;
   </script>
@@ -49,55 +49,80 @@
           </br></br>
 
           <!-- modes -->
-          <div class="panel panel-default">
-            <div class="panel-heading">Modes</div>
+          <div class="panel panel-default" id="modeResultsPanel">
+            <div class="panel-heading"><center>Modes</center></div>
             <div class="panel-body">
-              <% var keys = Object.keys(modes); %>
-              <% keys.forEach(function(key){ %>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="<%= modes[key].shortName%>" value="">
-                    <%= modes[key].displayName%>
-                  </label>
-                </div>
-              <% }) %>
+
+              <div class="col-sm-6">
+                <% var keys = Object.keys(modes); %>
+                <% keys.slice(0,Math.ceil(keys.length/2)).forEach(function(key){ %>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="<%= modes[key].shortName%>" value="">
+                      <%= modes[key].displayName%>
+                    </label>
+                  </div>
+                <% }) %>
+              </div>
+              <div class="col-sm-6">
+                <% var keys = Object.keys(modes); %>
+                <% keys.slice(Math.ceil(keys.length/2),keys.length).forEach(function(key){ %>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="<%= modes[key].shortName%>" value="">
+                      <%= modes[key].displayName%>
+                    </label>
+                  </div>
+                <% }) %>
+              </div>
+
             </div>
           </div>
         </form>
 
-        <div style="overflow-y:scroll; height = 100px">
-          <!-- results -->
-          <% if(results != null){ %>
-            <div class="panel panel-default">
-              <div class="panel-heading">Results</div>
+        <!-- results -->
+        <% if(results != null){ %>
+          <div class="panel panel-default" id="resultsPanel">
+            <div class="panel-heading"><center>Results</center></div>
 
-              <% var resultKeys = Object.keys(results); %>
-              <table class="table table-hover">
-                <tr>
-                  <th>Mode</th>
-                  <th>Time</th>
-                  <th>Energy</th>
-                  <th>Style Points</th>
-                </tr>
-              <% resultKeys.forEach(function(key){ %>
-                <% var mode = results[key]; %>
-                <% var ejs = (mode.time)/60; %>
-                <tr onclick="populateDirections('<%= key %>')">
-                  <td> <%= key %> </td>
+            <% var resultKeys = Object.keys(results); %>
+            <table class="table table-hover">
+              <tr>
+                <th>Mode</th>
+                <th>Time</th>
+                <th>Energy</th>
+                <th>Style Points</th>
+              </tr>
+            <% resultKeys.forEach(function(key){ %>
+              <% var mode = results[key]; %>
+              <% var ejs = (mode.time)/60; %>
+              <tr onclick="populateDirections('<%= key %>')">
+                <td> <%= key %> </td>
 
-                  <td> <%= ejs.toFixed(1) %> min </td>
-                  <td> <%= mode.energy.toFixed(1) %> kcal </td>
-                  <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
-                </tr>
-              <% }); %>
-              </table>
-            </div>
-          <% } %>
-          <!--directions-->
-          <div id="directionZones">
+                <td> <%= ejs.toFixed(1) %> min </td>
+                <td> <%= mode.energy.toFixed(1) %> kcal </td>
+                <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
+              </tr>
+            <% }); %>
+            </table>
           </div>
+        <% } %>
 
+        <!--directions-->
+        <div class="panel panel-default container-fluid" id="directionsPanel" style="display:none;">
+          <div class="panel-heading row">
+            <div class="col-sm-4">
+              <a onclick="hideDirections();"><p><< Back to results</p></a>
+            </div>
+            <div class="col-sm-4">
+              <center>Directions</center>
+            </div>
+          </div>
+          <div class="panel-body" id="directionsPanelBody">
+
+          </div>
         </div>
+
 
       </div>
       <div class="col-lg-8"><div style="height:100%" id="gmap">Map didn't load</div></div>

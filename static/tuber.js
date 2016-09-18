@@ -7,6 +7,9 @@ var endMarker;
 var startBox;
 var destinationBox;
 
+var resultsPanel;
+var directionsPanel;
+
 function initializeMap(){
   map = new google.maps.Map(document.getElementById('gmap'), {
           center: {lat: 42.359667, lng: -71.087549},
@@ -28,22 +31,26 @@ function initializeMap(){
     label: "Start Point",
     draggable: true
   });
-  console.log(fullDirectionsData);
+
+  resultsPanel = document.getElementById("resultsPanel");
+  directionsPanel = document.getElementById("directionsPanel");
 }
 
 function populateDirections(modeName){
   var steps = fullDirectionsData[modeName].steps_list;
-  var htmlString = '<div class="panel panel-default"><div class="panel-heading">Directions</div>';
-  htmlString += '<div class="panel-body">'
+  var htmlString = '';
   for(var i = 0; i < steps.length; i++){
     htmlString += steps[i].html_instructions+"</br>";
-    console.log(steps[i]);
   }
-  htmlString += "</div></div>"
-  console.log(htmlString);
-  document.getElementById("directionZones").innerHTML = htmlString;
+  document.getElementById("directionsPanelBody").innerHTML = htmlString;
+  resultsPanel.style.display = 'none';
+  directionsPanel.style.display = 'block';
 }
 
+function hideDirections(){
+  resultsPanel.style.display = 'block';
+  directionsPanel.style.display = 'none';
+}
 
 function setStart(){
   var center = map.getCenter();
