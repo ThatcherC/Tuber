@@ -46,7 +46,7 @@ addMode("cartwheeling", "Cartwheeling", "walking", function(walkingObject){
   return cartwheelingObject;
 });
 
-<<<<<<< HEAD
+
 
 addMode("hoverboarding1","Hoverboarding- Back to the Future Style", "biking", function(bikingObject){
 
