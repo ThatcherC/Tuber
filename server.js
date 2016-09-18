@@ -67,7 +67,7 @@ function findBestMode(endPoints,
           else if(modes.modeList[enabledModes[i]].baseMode == 'driving') {
             object = JSON.parse(JSON.stringify(drivingObject));
           }else if(modes.modeList[enabledModes[i]].baseMode == 'biking'){
-            object = JSON.parse(JSON.stringify(drivingObject));
+            object = JSON.parse(JSON.stringify(bikingObject));
           }else {
 
 

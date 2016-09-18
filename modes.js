@@ -97,10 +97,9 @@ addMode("golfcarting", "Golfcarting", "biking", function(bikingObject){
   return golfcartingObject;
 });
 
-addMode("airplane", "Airplane", "other", function(walkingObject){
+addMode("airplane", "Airplane", "walking", function(walkingObject){
   var airplaneObject = {};
   var speed = 250;
-  console.log(walkingObject)
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
 
   airplaneObject.time = directDistance/speed;
@@ -109,10 +108,9 @@ addMode("airplane", "Airplane", "other", function(walkingObject){
   return airplaneObject;
 });
 
-addMode("qm", "Quantum Mechanical Tunneling", "other", function(walkingObject){
+addMode("qm", "Quantum Mechanical Tunneling", "walking", function(walkingObject){
   var qmObject = {};
   var speed = Infinity;
-  console.log(walkingObject)
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
 
   qmObject.time = 0;

@@ -26,7 +26,9 @@ function getWalkingDirections(endPoints, callback)
 			var start_coords = retrieveStartCoords(mode);
 			var end_coords = retrieveEndCoords(mode);
       var output = {"time":time,"steps_list":steps_list};
-      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list,"start_coords":start_coords,"end_coords":end_coords};
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list,
+      "start_coords":start_coords,"end_coords":end_coords};
+      console.log(output["start_coords"]);
 
 			callback(output);
    	}
@@ -51,7 +53,10 @@ function getDrivingDirections(endPoints, callback)
       var energy = time*driving_energy_p_sec;
       var stylepoints = time*driving_style_p_sec;
       var steps_list = parseDirections(mode);
-      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list};
+      var start_coords = retrieveStartCoords(mode);
+      var end_coords = retrieveEndCoords(mode);
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list, 
+      "start_coords":start_coords,"end_coords":end_coords};
 			callback(output);
    	}
   });
@@ -75,7 +80,10 @@ function getBikingDirections(endPoints, callback)
       var energy = time*biking_energy_p_sec;
       var stylepoints = time*biking_energy_p_sec;
       var steps_list = parseDirections(mode);
-      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list};
+      var start_coords = retrieveStartCoords(mode);
+      var end_coords = retrieveEndCoords(mode);
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list, 
+      "start_coords":start_coords,"end_coords":end_coords};
 			callback(output);
    	}
   });
@@ -84,13 +92,13 @@ function getBikingDirections(endPoints, callback)
 function retrieveStartCoords(mode)
 {
   /* access w ["lat"] ["lng"] */
-  return mode["routes"][0]["legs"]["start_location"];
+  return mode["routes"][0]["legs"][0]["start_location"];
 }
 
 function retrieveEndCoords(mode)
 {
   /* access w ["lat"] ["lng"] */
-  return mode["routes"][0]["legs"]["end_location"];
+  return mode["routes"][0]["legs"][0]["end_location"];
 }
 
 function parseTotalTime(mode)
