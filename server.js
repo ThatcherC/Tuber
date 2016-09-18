@@ -75,12 +75,7 @@ function findBestMode(endPoints,
           var result = modes.modeList[enabledModes[i]].eval(object);
           var modeName = modes.modeList[enabledModes[i]].displayName;
           modeResults[modeName] = result;
-
-          // TODO
-          console.log(result.steps_list);
         }
-
-				console.log(modeResults);
 
 				var unsorted_parameters = [];
 				var unsorted_names = [];
