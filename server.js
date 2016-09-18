@@ -20,7 +20,10 @@ app.listen(8080);
 //Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res){
 	var endPoints = req.body;
-	findBestMode(endPoints, ["cartwheeling"], null, null);
+
+  var enabledModes = Object.keys(req.body).slice(2);
+
+	findBestMode(endPoints, enabledModes, null, null);
 	res.send(req.body);
 	// var modes = {"driving":"", "walking":"", "bicycling":""};
 	endPoints = {start: req.body.start, end:req.body.end};
@@ -44,10 +47,11 @@ function findBestMode(endPoints,
     apis.getDrivingDirections(endPoints, function(drivingObject){
       apis.getBikingDirections(endPoints, function(bikingObject){
 
-        var modeResults = [];
+        var modeResults = {};
 
         for(var i = 0; i < enabledModes.length; i++){
           var object = {};
+
           if(modes.modeList[enabledModes[i]].baseMode == 'walking') {
             object = JSON.parse(JSON.stringify(walkingObject));
           }
@@ -59,12 +63,12 @@ function findBestMode(endPoints,
             object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
           }
           var result = modes.modeList[enabledModes[i]].eval(object);
-          modeResults[i] = result;
+          modeResults[enabledModes[i]] = result;
         }
 
-        console.log(modeResults);
+        return modeResults;
         //sort modes by chosen paramter
-        
+
 
       });
     });
