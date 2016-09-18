@@ -40,6 +40,8 @@ app.get("/",function(req,res){
 //enabledModes = list of names of enabled modes as strings
 //optimizationParameter = "time", "cost", "energy", "style points"
 //optimizationDirection = "up","down"
+
+
 function findBestMode(endPoints,
 										  enabledModes,
 										  optimizationParameter,
@@ -61,6 +63,8 @@ function findBestMode(endPoints,
           }else if(modeList[enabledModes[i]].baseMode == 'biking'){
             object = JSON.parse(JSON.stringify(drivingObject));
           }else {
+          	
+
 	    object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
             //what TODO here? pass start and end lat/lng to object???
           }
