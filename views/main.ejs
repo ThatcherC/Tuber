@@ -37,18 +37,16 @@
           <button type="submit" class="btn btn-default">Go!</button>
 
           <!-- modes -->
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="mode-name" value="">
-              Cartwheel mode
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="mode-name" value="">
-              Quantum Tunnelling mode
-            </label>
-          </div>
+          <% var keys = Object.keys(modes); %>
+          <% keys.forEach(function(key){ %>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="<%= modes[key].shortName %> " value="">
+                <%= modes[key].displayName %>
+              </label>
+            </div>
+          <% }) %>
+
 
         </form>
 

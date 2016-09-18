@@ -10,6 +10,7 @@ var modes = require("./modes");
 
 
 var app = express();
+app.set('view engine', 'ejs');
 app.use(express.static('static'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -17,8 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.listen(8080);
 
 //Receives post data from the browser. Data is stored in the object req.body
-app.post("/",function(req, res, endPoints){
-	endPoints = req.body;
+app.post("/",function(req, res){
+	var endPoints = req.body;
 	findBestMode(endPoints, null, null, null);
 	res.send(req.body);
 	// var modes = {"driving":"", "walking":"", "bicycling":""};
@@ -32,7 +33,7 @@ app.post("/",function(req, res, endPoints){
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
 app.get("/",function(req,res){
-	res.render('main');
+	res.render('main',{modes: modes.modeList});
 });
 
 //endPoints = contains the starting and destination locations
