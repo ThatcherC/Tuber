@@ -84,7 +84,8 @@ addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
 addMode("airplane", "Airplane", 'other', function(walkingObject){
   var airplaneObject = {};
   var speed = 250;
-  var directDistance = calcStraightDist(apis.retrieveStartCoords(walkingObject),apis.retrieveEndCoords(walkingObject));
+  console.log(walkingObject)
+  var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
 
   airplaneObject.time = directDistance/speed;
   airplaneObject.energy = 0;
@@ -92,12 +93,12 @@ addMode("airplane", "Airplane", 'other', function(walkingObject){
   return airplaneObject;
 });
 
-function calcStraightDist(startcoords, endcoords) {
+function calcStraightDist(start_coords, end_coords) {
   var R = 6371e3; // metres
-    var lat1 = startcoords["lat"]
-    var lat2 = endcoords["lat"]
-    var lon1 = startcoords["lng"]
-    var lon2 = startcoords["lng"]
+    var lat1 = start_coords["lat"]
+    var lat2 = end_coords["lat"]
+    var lon1 = start_coords["lng"]
+    var lon2 = start_coords["lng"]
     var φ1 = lat1.toRadians();
     var φ2 = lat2.toRadians();
     var Δφ = (lat2-lat1).toRadians();
