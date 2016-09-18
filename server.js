@@ -19,6 +19,9 @@ app.listen(8080);
 
 //Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res, endPoints){
+	endPoints = req.body;
+	findBestMode(endPoints, null, null, null);
+	res.send(req.body);
 	// var modes = {"driving":"", "walking":"", "bicycling":""};
 	endPoints = {start: req.body.start, end:req.body.end};
 
@@ -26,9 +29,6 @@ app.post("/",function(req, res, endPoints){
   apis.getDrivingDirections(endPoints,function(otpt){
     console.log(otpt);
   });
-	//findBestMode(endPoints, ['Cartwheeling'], null, null);
-
-  res.send(req.body);
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
