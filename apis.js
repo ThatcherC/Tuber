@@ -17,6 +17,9 @@ function getWalkingDirections(endPoints, callback)
   var output = {};
 
 	request(apiUrl, function (error, response, body) {
+		if(error){
+			console.log("API REQUEST ERROR: \n"+error);
+		}
 		if (!error && response.statusCode == 200) {
       mode = JSON.parse(body);
       var time = parseTotalTime(mode);
@@ -47,6 +50,9 @@ function getDrivingDirections(endPoints, callback)
   var output = {};
 
   request(apiUrl, function (error, response, body) {
+		if(error){
+			console.log("API REQUEST ERROR: \n"+error);
+		}
 		if (!error && response.statusCode == 200) {
        mode = JSON.parse(body);
       var time = parseTotalTime(mode);
@@ -55,7 +61,7 @@ function getDrivingDirections(endPoints, callback)
       var steps_list = parseDirections(mode);
       var start_coords = retrieveStartCoords(mode);
       var end_coords = retrieveEndCoords(mode);
-      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list, 
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list,
       "start_coords":start_coords,"end_coords":end_coords};
 			callback(output);
    	}
@@ -74,6 +80,9 @@ function getBikingDirections(endPoints, callback)
   var output = {};
 
   request(apiUrl, function (error, response, body) {
+			if(error){
+				console.log("API REQUEST ERROR: \n"+error);
+			}
 			if (!error && response.statusCode == 200) {
          mode = JSON.parse(body);
       var time = parseTotalTime(mode);
@@ -82,7 +91,7 @@ function getBikingDirections(endPoints, callback)
       var steps_list = parseDirections(mode);
       var start_coords = retrieveStartCoords(mode);
       var end_coords = retrieveEndCoords(mode);
-      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list, 
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list,
       "start_coords":start_coords,"end_coords":end_coords};
 			callback(output);
    	}
