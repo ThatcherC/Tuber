@@ -38,7 +38,7 @@ addMode("driving", "Driving", 'driving', function(drivingObject){
 
 addMode("unicycling", "Unicycling", 'biking', function(bikingObject){
   var bikingObject = JSON.parse(JSON.stringify(bikingObject));
-  bikingObject.time = bikingObject.time*1.1;
+  bikingObject.time = bikingObject.time*1.2;
   bikingObject.energy = bikingObject.energy*1.2;
   bikingObject.stylepoints = bikingObject.stylepoints*1.5+15;
   return bikingObject;
@@ -54,7 +54,7 @@ addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
 
 addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', function(bikingObject){
   var hoverboardingObject = JSON.parse(JSON.stringify(bikingObject));;
-  hoverboardingObject.time = bikingObject.time*0.7;
+  hoverboardingObject.time = bikingObject.time*1.1;
   hoverboardingObject.energy = bikingObject.energy*0.1;
   hoverboardingObject.stylepoints = bikingObject.stylepoints*1.2+40;
   return hoverboardingObject;
@@ -62,7 +62,7 @@ addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', fu
 
 addMode("hoverboarding2","Hoverboarding- Segway Style", 'biking', function(bikingObject){
   var hoverboarding2Object = JSON.parse(JSON.stringify(bikingObject));;
-  hoverboarding2Object.time = bikingObject.time*0.3;
+  hoverboarding2Object.time = bikingObject.time*1.3;
   hoverboarding2Object.energy = bikingObject.energy*0.1;
   hoverboarding2Object.stylepoints = bikingObject.stylepoints*.45;
   return hoverboarding2Object;
@@ -79,7 +79,7 @@ addMode("leapfrogging", "Leapfrogging", 'walking', function(walkingObject){
 
 addMode("skateboarding","Skateboarding", 'walking', function(bikingObject){
   var skateboardingObject = JSON.parse(JSON.stringify(bikingObject));;
-  skateboardingObject.time = bikingObject.time*1.7;
+  skateboardingObject.time = bikingObject.time*1.5;
   skateboardingObject.energy = bikingObject.energy*2.6;
   skateboardingObject.stylepoints = bikingObject.stylepoints*.15+20;
   return skateboardingObject;
@@ -87,7 +87,7 @@ addMode("skateboarding","Skateboarding", 'walking', function(bikingObject){
 
 addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
   var golfcartingObject = JSON.parse(JSON.stringify(bikingObject));;
-  golfcartingObject.time = bikingObject.time*1.7;
+  golfcartingObject.time = bikingObject.time*1.2;
   golfcartingObject.energy = bikingObject.energy*2.6;
   golfcartingObject.stylepoints = bikingObject.stylepoints*.25;
   return golfcartingObject;
