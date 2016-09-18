@@ -24,15 +24,14 @@ app.post("/",function(req, res){
   var enabledModes = Object.keys(req.body).slice(2);
 
 	findBestMode(endPoints, enabledModes, null, null,function(sortedResults){
-    console.log(sortedResults);
-    res.render('main',{modes: modes.modeList, results: sortedResults});
+    res.render('main',{modes: modes.modeList, results: sortedResults, dataAsString: JSON.stringify(sortedResults)});
   });
 	//res.send(req.body);
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
 app.get("/",function(req,res){
-	res.render('main',{modes: modes.modeList, results:null});
+	res.render('main',{modes: modes.modeList, results:null, dataAsString: "{}"});
 });
 
 
@@ -61,24 +60,24 @@ function findBestMode(endPoints,
         for(var i = 0; i < enabledModes.length; i++){
           var object = {};
 
-          if(modes.modeList[enabledModes[i]].baseMode == "walking") {
+          if(modes.modeList[enabledModes[i]].baseMode == 'walking') {
             object = JSON.parse(JSON.stringify(walkingObject));
           }
-          else if(modes.modeList[enabledModes[i]].baseMode == "driving") {
+          else if(modes.modeList[enabledModes[i]].baseMode == 'driving') {
             object = JSON.parse(JSON.stringify(drivingObject));
-          }else if(modes.modeList[enabledModes[i]].baseMode == "biking"){
-            object = JSON.parse(JSON.stringify(drivingObject));
+          }else if(modes.modeList[enabledModes[i]].baseMode == 'biking'){
+            object = JSON.parse(JSON.stringify(bikingObject));
           }else {
- 						object = {"total_time":enabledModes[i]["time"],"total_energy":enabledModes[i]["energy"],"total_style":["stylepoints"],"directions":0}
 
 
-
-
+            object = {"total_time":enabledModes[i]["time"],"total_energy":enabledModes[i]["energy"],"total_style":enabledModes[i]["stylepoints"],"directions":0}
           }
           var result = modes.modeList[enabledModes[i]].eval(object);
           var modeName = modes.modeList[enabledModes[i]].displayName;
           modeResults[modeName] = result;
         }
+
+				console.log(modeResults);
 
 				var unsorted_parameters = [];
 				var unsorted_names = [];
