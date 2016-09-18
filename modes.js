@@ -101,6 +101,7 @@ addMode("airplane", "Airplane", 'walking', function(walkingObject){
   airplaneObject.time = (directDistance/speed)+3600;
   airplaneObject.energy = 0;
   airplaneObject.stylepoints = 4*(airplaneObject.time)-9000;/*depends on the type of plane*/
+
   return airplaneObject;
 });
 
@@ -113,6 +114,11 @@ addMode("qm", "Quantum Tunneling", 'walking', function(walkingObject){
   qmObject.time = 0;
   qmObject.energy = 0;
   qmObject.stylepoints = Infinity;/*depends on the type of plane*/
+
+  var steps_list = JSON.parse(JSON.stringify(["wait"]));
+
+  qmObject.steps_list = steps_list
+  console.log(qmObject.steps_list)
   return qmObject;
 });
 

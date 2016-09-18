@@ -70,7 +70,7 @@ function findBestMode(endPoints,
           }else {
 
 
-            object = {"total_time":enabledModes[i]["time"],"total_energy":enabledModes[i]["energy"],"total_style":enabledModes[i]["stylepoints"],"directions":0}
+            object = {"total_time":enabledModes[i]["time"],"total_energy":enabledModes[i]["energy"],"total_style":enabledModes[i]["stylepoints"],"directions":enabledModes[i]["steps_list"]};
           }
           var result = modes.modeList[enabledModes[i]].eval(object);
           var modeName = modes.modeList[enabledModes[i]].displayName;

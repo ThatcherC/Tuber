@@ -117,8 +117,12 @@ function parseTotalTime(mode)
 
 function parseDirections(mode)
 {
+
   return mode["routes"][0]["legs"][0]["steps"];
 }
+
+ 
+
 
 module.exports = {
   parseDirections: parseDirections,
