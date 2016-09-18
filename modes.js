@@ -1,5 +1,6 @@
 
 var modeList = {};
+var request = require('request');
 
 //Creates a new mode with a name, a base mode (walking, driving, or other),
 //and a function to modify the base mode.

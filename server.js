@@ -3,7 +3,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var request = require('request');
 
 var apis = require("./apis");
 var modes = require("./modes");

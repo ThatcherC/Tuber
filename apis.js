@@ -3,6 +3,7 @@
 var endPoints = {};
 const APIKEY = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
 
+
 function getWalkingDirections(endPoints, request)
 {
 	var mode = null;
