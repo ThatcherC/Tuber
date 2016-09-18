@@ -52,7 +52,7 @@ addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
   return cartwheelingObject;
 });
 
-addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', function(bikingObject){
+addMode("hoverboarding1","Hoverboarding - Fictional", 'biking', function(bikingObject){
   var hoverboardingObject = JSON.parse(JSON.stringify(bikingObject));;
   hoverboardingObject.time = bikingObject.time*1.1;
   hoverboardingObject.energy = bikingObject.energy*0.1;
@@ -60,7 +60,7 @@ addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', fu
   return hoverboardingObject;
 });
 
-addMode("hoverboarding2","Hoverboarding- Segway Style", 'biking', function(bikingObject){
+addMode("hoverboarding2","Hoverboarding - Real", 'biking', function(bikingObject){
   var hoverboarding2Object = JSON.parse(JSON.stringify(bikingObject));;
   hoverboarding2Object.time = bikingObject.time*1.3;
   hoverboarding2Object.energy = bikingObject.energy*0.1;
@@ -105,7 +105,7 @@ addMode("airplane", "Airplane", 'walking', function(walkingObject){
 });
 
 
-addMode("qm", "Quantum Mechanical Tunneling", 'walking', function(walkingObject){
+addMode("qm", "Quantum Tunneling", 'walking', function(walkingObject){
   var qmObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = Infinity;
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
