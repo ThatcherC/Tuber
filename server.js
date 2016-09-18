@@ -52,7 +52,7 @@ function findBestMode(endPoints,
     else if(modeList[enabledModes[i]].baseMode == 'driving') {
       object = JSON.parse(JSON.stringify(drivingObject));
     }else if(modeList[enabledModes[i]].baseMode == 'biking'){
-      object = JSON.parse(JSON.stringify(drivingObject));
+      object = JSON.parse(JSON.stringify(bikingObject));
     }else {
       //what TODO here? pass start and end lat/lng to object???
       // TODO pass lat/long and (prob) distance to object
