@@ -71,29 +71,30 @@ function findBestMode(endPoints,
           }else {
 
 
-
-	    object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
-            //what TODO here? pass start and end lat/lng to object???
-
             object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
-
           }
           var result = modes.modeList[enabledModes[i]].eval(object);
-
-          modeResults[enabledModes[i]] = JSON.parse(JSON.stringify(result));
+          var modeName = modes.modeList[enabledModes[i]].displayName;
+          modeResults[modeName] = result;
         }
 
 				var unsorted_parameters = [];
 				var unsorted_names = [];
-				for (x in modeResults) {
-			  unsorted_names.push(x);
-   	 		unsorted_parameters.push(modeResults[x][optimizationParameter]);
+				for (x in modeResults) {        //break modeResults into two parts
+				  unsorted_names.push(x);
+	   	 		unsorted_parameters.push(modeResults[x][optimizationParameter]);
+				}
+
+        //sort the parameters
+				var sorted_parameters = JSON.parse(JSON.stringify(unsorted_parameters)).sort(function(a,b) { return a - b; });
+				if (optimizationDirection === "down"){
+					sorted_parameters.reverse();
 				}
 
 
-				var sorted_parameters = JSON.parse(JSON.stringify(unsorted_parameters)).sort(function(a,b) { return a - b; });
 				var sorted_names = [];
 
+        //make sure the names are also sorted
 			  for(var i = 0; i < sorted_parameters.length; i++){
 					for(var j = 0; j < sorted_parameters.length; j++){
 
@@ -103,27 +104,13 @@ function findBestMode(endPoints,
 					}
 				}
 
-          return sorted_names;
+        //recombine sorted_names;
+				var newModeResults = {};
+				for(var i= 0; i < sorted_parameters.length; i++){
+					newModeResults[sorted_names[i]] = modeResults[sorted_names[i]];
+				}
 
-<<<<<<< HEAD
-	         var modeName = modes.modeList[enabledModes[i]].displayName;
-            modeResults[modeName] = result;
-        }
-=======
-
-          var modeName = modes.modeList[enabledModes[i]].displayName;
-          modeResults[modeName] = result;
-        
->>>>>>> 9112cd7ebc5824eb98f96fe451fa93ec89701617
-
-
-
-        callback(modeResults);
-<<<<<<< HEAD
-=======
-        //sort modes by chosen paramter
-
->>>>>>> 9112cd7ebc5824eb98f96fe451fa93ec89701617
+        callback(newModeResults);
       });
     });
   });

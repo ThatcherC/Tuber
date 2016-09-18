@@ -52,26 +52,26 @@ function callAPI(endPoints, callback, energy_p_sec, style_p_sec)
   });
 }
 
-function retrieveStartCoords(mode)
+function retrieveStartCoords(baseModeResult)
 {
   /* access w ["lat"] ["lng"] */
-  return mode["routes"][0]["legs"]["start_location"];
+  return baseModeResult["routes"][0]["legs"]["start_location"];
 }
 
-function retrieveEndCoords(mode)
+function retrieveEndCoords(baseModeResult)
 {
   /* access w ["lat"] ["lng"] */
-  return mode["routes"][0]["legs"]["end_location"];
+  return baseModeResult["routes"][0]["legs"]["end_location"];
 }
 
-function parseTotalTime(mode)
+function parseTotalTime(baseModeResult)
 {
-  return mode["routes"][0]["legs"][0]["duration"]["value"];
+  return baseModeResult["routes"][0]["legs"][0]["duration"]["value"];
 }
 
-function parseDirections(mode)
+function parseDirections(baseModeResult)
 {
-  return mode["routes"][0]["legs"][0]["steps"];
+  return baseModeResult["routes"][0]["legs"][0]["steps"];
 }
 
 module.exports = {
