@@ -105,25 +105,19 @@ function findBestMode(endPoints,
 
           return sorted_names;
 
-<<<<<<< HEAD
 	         var modeName = modes.modeList[enabledModes[i]].displayName;
             modeResults[modeName] = result;
         }
-=======
 
           var modeName = modes.modeList[enabledModes[i]].displayName;
           modeResults[modeName] = result;
         
->>>>>>> 9112cd7ebc5824eb98f96fe451fa93ec89701617
 
 
 
         callback(modeResults);
-<<<<<<< HEAD
-=======
         //sort modes by chosen paramter
 
->>>>>>> 9112cd7ebc5824eb98f96fe451fa93ec89701617
       });
     });
   });
