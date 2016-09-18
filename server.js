@@ -89,6 +89,11 @@ function findBestMode(endPoints,
 				}
 
 				var sorted_parameters = JSON.parse(JSON.stringify(unsorted_parameters)).sort(function(a,b) { return a - b; });
+				if (optimizationDirection === "down"){
+					sorted_parameters.reverse();
+				}
+
+
 				var sorted_names = [];
 
 			  for(var i = 0; i < sorted_parameters.length; i++){
