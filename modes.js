@@ -22,7 +22,7 @@ addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
   return cartwheelingObject;
 });
 
-addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', function(bikingObject){
+addMode("hoverboarding1","Hoverboarding", 'biking', function(bikingObject){
   var hoverboardingObject = {};
   hoverboardingObject.time = bikingObject.time*0.7;
   hoverboardingObject.energy = bikingObject.energy*0.1;
