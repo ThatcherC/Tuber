@@ -101,7 +101,27 @@ addMode("airplane", "Airplane", 'walking', function(walkingObject){
   airplaneObject.time = (directDistance/speed)+3600;
   airplaneObject.energy = 0;
   airplaneObject.stylepoints = 4*(airplaneObject.time)-9000;/*depends on the type of plane*/
+  var steps_list = [{ distance: { text: '0.1 mi', value: 166 },
+    duration: { text: '2 mins', value: 123 },
+    end_location: { lat: 42.3610669, lng: -71.0882724 },
+    html_instructions: 'Buy a <b>private jet  </b>',
+    polyline: { points: 'ckpaGpg{pLOFWNWNcEtBMD' },
+    start_location: { lat: 42.359702, lng: -71.0874498 },
+    travel_mode: 'WALKING' },{ distance: { text: '0.1 mi', value: 166 },
+      duration: { text: '2 mins', value: 123 },
+      end_location: { lat: 42.3610669, lng: -71.0882724 },
+      html_instructions: 'Go to a <b>private airport </b>',
+      polyline: { points: 'ckpaGpg{pLOFWNWNcEtBMD' },
+      start_location: { lat: 42.359702, lng: -71.0874498 },
+      travel_mode: 'WALKING' }, { distance: { text: '0.1 mi', value: 166 },
+        duration: { text: '2 mins', value: 123 },
+        end_location: { lat: 42.3610669, lng: -71.0882724 },
+        html_instructions: 'Fly to your <b>destination </b>  </b>',
+        polyline: { points: 'ckpaGpg{pLOFWNWNcEtBMD' },
+        start_location: { lat: 42.359702, lng: -71.0874498 },
+        travel_mode: 'WALKING' }];
 
+  airplaneObject.steps_list = steps_list
   return airplaneObject;
 });
 
@@ -115,10 +135,16 @@ addMode("qm", "Quantum Tunneling", 'walking', function(walkingObject){
   qmObject.energy = 0;
   qmObject.stylepoints = Infinity;/*depends on the type of plane*/
 
-  var steps_list = JSON.parse(JSON.stringify(["wait"]));
+  var steps_list = [{ distance: { text: '0.1 mi', value: 166 },
+    duration: { text: '2 mins', value: 123 },
+    end_location: { lat: 42.3610669, lng: -71.0882724 },
+    html_instructions: 'Wait for a <b>very very </b> </b> long time... </b>',
+    polyline: { points: 'ckpaGpg{pLOFWNWNcEtBMD' },
+    start_location: { lat: 42.359702, lng: -71.0874498 },
+    travel_mode: 'WALKING' }];
 
   qmObject.steps_list = steps_list
-  console.log(qmObject.steps_list)
+
   return qmObject;
 });
 
