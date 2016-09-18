@@ -14,6 +14,31 @@ function addMode(shortName, displayName, baseMode, eval){
 }
 
 
+
+addMode("biking", "Biking", 'biking', function(bikingObject){
+  var bikingObject = {};
+  bikingObject.time = bikingObject.time*1.0;
+  bikingObject.energy = bikingObject.energy*1.0;
+  bikingObject.stylepoints = bikingObject.stylepoints*1.0;
+  return bikingObject;
+});
+
+addMode("walking", "Walking", 'walking', function(walkingObject){
+  var walkingObject = {};
+  walkingObject.time = walkingObject.time*1.0;
+  walkingObject.energy = walkingObject.energy*1.0;
+  walkingObject.stylepoints = walkingObject.stylepoints*1.0;
+  return walkingObject;
+});
+
+addMode("driving", "Driving", 'driving', function(drivingObject){
+  var drivingObject = {};
+  drivingObject.time = drivingObject.time*1.0;
+  drivingObject.energy = drivingObject.energy*1.0;
+  drivingObject.stylepoints = drivingObject.stylepoints*1.0;
+  return drivingObject;
+});
+
 addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
   var cartwheelingObject = {};
   cartwheelingObject.time = walkingObject.time*5.4;
@@ -22,12 +47,21 @@ addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
   return cartwheelingObject;
 });
 
+
 addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', function(bikingObject){
   var hoverboardingObject = {};
   hoverboardingObject.time = bikingObject.time*0.7;
   hoverboardingObject.energy = bikingObject.energy*0.1;
   hoverboardingObject.stylepoints = bikingObject.stylepoints*.65;
   return hoverboardingObject;
+});
+
+addMode("hoverboarding2","Hoverboarding- Segway Style", 'biking', function(bikingObject){
+  var hoverboarding2Object = {};
+  hoverboarding2Object.time = bikingObject.time*0.3;
+  hoverboarding2Object.energy = bikingObject.energy*0.1;
+  hoverboarding2Object.stylepoints = bikingObject.stylepoints*.3;
+  return hoverboarding2Object;
 });
 
 addMode("leapfrogging", "Leapfrogging", 'walking', function(walkingObject){
@@ -73,6 +107,19 @@ addMode("airplane", "Airplane", 'other', function(walkingObject){
   airplaneObject.stylepoints = 1;/*depends on the type of plane*/
   return airplaneObject;
 });
+
+addMode("qm", "Quantum Mechanical Tunneling", 'other', function(walkingObject){
+  var qmObject = {};
+  var speed = Infinity;
+  console.log(walkingObject)
+  var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
+
+  qmObject.time = 0;
+  qmObject.energy = 0;
+  qmObject.stylepoints = Infinity;/*depends on the type of plane*/
+  return qmObject;
+});
+
 
 function calcStraightDist(start_coords, end_coords) {
   var R = 6371e3; // metres
