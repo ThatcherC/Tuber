@@ -11,6 +11,8 @@ function getWalkingDirections(endPoints, request)
   + endPoints["start"] + "&destination=" + endPoints["end"] +
   "&mode=walking&key=" + APIKEY
 
+  var output = {};
+
 	request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
       mode = JSON.parse(body);
@@ -18,8 +20,6 @@ function getWalkingDirections(endPoints, request)
       var total_time = parseTotalTime(mode);
       var steps_list = parseDirections(mode);
       var output = {"total_time":total_time,"steps_list":steps_list};
-      
-    
    	}
   });
 	return output;
@@ -31,6 +31,8 @@ function getDrivingDirections(endPoints, request)
 	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
   + endPoints["start"] + "&destination=" + endPoints["end"] +
   "&mode=driving&key=" + APIKEY
+
+  var output = {};
 
   request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
@@ -52,6 +54,8 @@ function getBikingDirections(endPoints, request)
   + endPoints["start"] + "&destination=" + endPoints["end"] +
   "&mode=bicycling&key=" + APIKEY
 
+  var output = {};
+
   request(apiUrl, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
          mode = JSON.parse(body);
@@ -62,6 +66,18 @@ function getBikingDirections(endPoints, request)
    	}
   });
 	return output;
+}
+
+function retrieveStartCoords(mode)
+{
+  /* access w ["lat"] ["lng"] */
+  return mode["routes"][0]["legs"]["start_location"];
+}
+
+function retrieveEndCoords(mode)
+{
+  /* access w ["lat"] ["lng"] */
+  return mode["routes"][0]["legs"]["end_location"];
 }
 
 function parseTotalTime(mode)

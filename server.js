@@ -19,7 +19,7 @@ app.listen(8080);
 //Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res, endPoints){
 	endPoints = req.body;
-	//findBestMode(endPoints, null, null, null);
+	findBestMode(endPoints, null, null, null);
 	res.send(req.body);
 });
 
@@ -42,22 +42,22 @@ function findBestMode(endPoints,
   drivingObject = apis.getDrivingDirections(endPoints, request);
   bikingObject = apis.getBikingDirections(endPoints, request);
 
-  var modeResults = [];
+  // var modeResults = [];
 
-  for(var i = 0; i < enabledModes.length; i++){
-    var object = {};
-    if(modeList[enabledModes[i]].baseMode == 'walking') {
-      object = JSON.parse(JSON.stringify(walkingObject));
-    }
-    else if(modeList[enabledModes[i]].baseMode == 'driving') {
-      object = JSON.parse(JSON.stringify(drivingObject));
-    }else if(modeList[enabledModes[i]].baseMode == 'biking'){
-      object = JSON.parse(JSON.stringify(drivingObject));
-    }else {
-      //what TODO here? pass start and end lat/lng to object???
-      // TODO pass lat/long and (prob) distance to object
-    }
-    var result = modeList[enabledModes[i]].eval(object);
-    modeResults[i] = result;
-  }
+  // for(var i = 0; i < enabledModes.length; i++){
+  //   var object = {};
+  //   if(modeList[enabledModes[i]].baseMode == 'walking') {
+  //     object = JSON.parse(JSON.stringify(walkingObject));
+  //   }
+  //   else if(modeList[enabledModes[i]].baseMode == 'driving') {
+  //     object = JSON.parse(JSON.stringify(drivingObject));
+  //   }else if(modeList[enabledModes[i]].baseMode == 'biking'){
+  //     object = JSON.parse(JSON.stringify(drivingObject));
+  //   }else {
+  //     //what TODO here? pass start and end lat/lng to object???
+  //     // TODO pass lat/long and (prob) distance to object
+  //   }
+  //   var result = modeList[enabledModes[i]].eval(object);
+  //   modeResults[i] = result;
+  // }
 }
