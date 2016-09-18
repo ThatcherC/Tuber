@@ -68,7 +68,7 @@ addMode("airplane", "Airplane", 'other', function(walkingObject){
 
   airplaneObject.time = directDistance/speed;
   airplaneObject.energy = 0;
-  airplaneObject.stylepoints = /*depends on the type of plane*/;
+  airplaneObject.stylepoints = 0/*depends on the type of plane*/;
   return airplaneObject;
 });
 
