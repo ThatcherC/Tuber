@@ -45,7 +45,7 @@ addMode("wheelchair","Wheelchair", 'walking', function(walkingObject){
   return wheelchairObject;
 });
 
-addMode("skateboarding","Skateboarding", 'walking', function(walkingObject){
+addMode("skateboarding","Skateboarding", 'walking', function(bikingObject){
   var skateboardingObject = {};
   skateboardingObject.time = bikingObject.time*1.7;
   skateboardingObject.energy = bikingObject.energy*2.6;
@@ -53,7 +53,7 @@ addMode("skateboarding","Skateboarding", 'walking', function(walkingObject){
   return skateboardingObject;
 });
 
-addMode("golfcarting", "Golfcarting", 'biking', function(walkingObject){
+addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
   var golfcartingObject = {};
   golfcartingObject.time = bikingObject.time*1.7;
   golfcartingObject.energy = bikingObject.energy*2.6;
