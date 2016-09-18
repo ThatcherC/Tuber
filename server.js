@@ -35,6 +35,8 @@ app.get("/",function(req,res){
 	res.render('main',{modes: modes.modeList, results:null});
 });
 
+
+
 //endPoints = contains the starting and destination locations
 //enabledModes = list of names of enabled modes as strings
 //optimizationParameter = "time", "cost", "energy", "style points"
@@ -67,25 +69,35 @@ function findBestMode(endPoints,
           }else if(modes.modeList[enabledModes[i]].baseMode == 'biking'){
             object = JSON.parse(JSON.stringify(drivingObject));
           }else {
-
-
-
-	           object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
-            //what TODO here? pass start and end lat/lng to object???
-
             object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
-
           }
           var result = modes.modeList[enabledModes[i]].eval(object);
           var modeName = modes.modeList[enabledModes[i]].displayName;
           modeResults[modeName] = result;
         }
 
+				var unsorted_parameters = [];
+				var unsorted_names = [];
+				for (x in modeResults) {
+  			  unsorted_names.push(x);
+     	 		unsorted_parameters.push(modeResults[x][optimizationParameter]);
+				}
 
+
+				var sorted_parameters = JSON.parse(JSON.stringify(unsorted_parameters)).sort(function(a,b) { return a - b; });
+				var sorted_names = [];
+
+			  for(var i = 0; i < sorted_parameters.length; i++){
+					for(var j = 0; j < sorted_parameters.length; j++){
+
+						if ((unsorted_parameters[j] === sorted_parameters[i]) && (sorted_names.indexOf(unsorted_names[j]) === -1))  {
+							sorted_names.push(unsorted_names[j]);
+						}
+					}
+				}
 
         callback(modeResults);
         //sort modes by chosen paramter
-
 
       });
     });
