@@ -69,6 +69,8 @@ function findBestMode(endPoints,
           }else if(modes.modeList[enabledModes[i]].baseMode == 'biking'){
             object = JSON.parse(JSON.stringify(drivingObject));
           }else {
+
+
             object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
           }
           var result = modes.modeList[enabledModes[i]].eval(object);
@@ -79,10 +81,12 @@ function findBestMode(endPoints,
 				var unsorted_parameters = [];
 				var unsorted_names = [];
 				for (x in modeResults) {
-  			  unsorted_names.push(x);
-     	 		unsorted_parameters.push(modeResults[x][optimizationParameter]);
-				}
 
+				  unsorted_names.push(x);
+	   	 		unsorted_parameters.push(modeResults[x][optimizationParameter]);
+
+
+				}
 
 				var sorted_parameters = JSON.parse(JSON.stringify(unsorted_parameters)).sort(function(a,b) { return a - b; });
 				var sorted_names = [];
@@ -96,7 +100,17 @@ function findBestMode(endPoints,
 					}
 				}
 
-        callback(modeResults);
+
+        //return sorted_names;
+				var newModeResults = {};
+				for(var i= 0; i < sorted_parameters.length; i++){
+					newModeResults[sorted_names[i]] = modeResults[sorted_names[i]];
+				}
+
+
+        callback(newModeResults);
+
+
         //sort modes by chosen paramter
 
       });
