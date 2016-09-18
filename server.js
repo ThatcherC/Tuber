@@ -3,7 +3,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var request = require('request');
 
 var apis = require("./apis");
 var modes = require("./modes");
@@ -20,9 +19,13 @@ app.listen(8080);
 //Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res, endPoints){
 	// var modes = {"driving":"", "walking":"", "bicycling":""};
-	endPoints = req.body;
-	//findBestMode(endPoints, null, null, null);
+	endPoints = {start: req.body.start, end:req.body.end};
 
+  //Test: shows driving direction for endpoints
+  apis.getDrivingDirections(endPoints,function(otpt){
+    console.log(otpt);
+  });
+	//findBestMode(endPoints, ['Cartwheeling'], null, null);
 
   res.send(req.body);
 });
@@ -43,27 +46,32 @@ function findBestMode(endPoints,
 										  optimizationDirection)
 {
 	var request = require('request');
-  walkingObject = apis.getWalkingDirections(endPoints, request);
-  drivingObject = apis.getDrivingDirections(endPoints, request);
-  bikingObject = apis.getBikingDirections(endPoints, request);
+  apis.getWalkingDirections(endPoints, function(walkingObject){
+    apis.getDrivingDirections(endPoints, function(drivingObject){
+      apis.getBikingDirections(endPoints, function(bikingObject){
 
-  var modeResults = [];
+        var modeResults = [];
 
-  for(var i = 0; i < enabledModes.length; i++){
-    var object = {};
-    if(modeList[enabledModes[i]].baseMode == 'walking') {
-      object = JSON.parse(JSON.stringify(walkingObject));
-    }
-    else if(modeList[enabledModes[i]].baseMode == 'driving') {
-      object = JSON.parse(JSON.stringify(drivingObject));
-    }else if(modeList[enabledModes[i]].baseMode == 'biking'){
-      object = JSON.parse(JSON.stringify(drivingObject));
-    }else {
-      //what TODO here? pass start and end lat/lng to object???
-    }
-    var result = modeList[enabledModes[i]].eval(object);
-    modeResults[i] = result;
-  }
+        for(var i = 0; i < enabledModes.length; i++){
+          var object = {};
+          if(modeList[enabledModes[i]].baseMode == 'walking') {
+            object = JSON.parse(JSON.stringify(walkingObject));
+          }
+          else if(modeList[enabledModes[i]].baseMode == 'driving') {
+            object = JSON.parse(JSON.stringify(drivingObject));
+          }else if(modeList[enabledModes[i]].baseMode == 'biking'){
+            object = JSON.parse(JSON.stringify(drivingObject));
+          }else {
+            //what TODO here? pass start and end lat/lng to object???
+          }
+          var result = modeList[enabledModes[i]].eval(object);
+          modeResults[i] = result;
+        }
 
-  //sort modes by chosen paramter
+        //sort modes by chosen paramter
+
+
+      });
+    });
+  });
 }

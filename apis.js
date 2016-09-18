@@ -1,9 +1,11 @@
 //apis.js
 
+var request = require('request');
+
 var endPoints = {};
 const APIKEY = "AIzaSyDjyS7OrT48xkaHmbR5nJEvS-QO3pLTk8A"
 
-function getWalkingDirections(endPoints, request)
+function getWalkingDirections(endPoints, callback)
 {
 	var mode = null;
 	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
@@ -13,18 +15,17 @@ function getWalkingDirections(endPoints, request)
 	request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
       mode = JSON.parse(body);
-      
+
       var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
       var steps_list = mode["routes"][0]["legs"][0]["steps"];
       var output = {"total_time":total_time,"steps_list":steps_list};
-      
-    
+
+			callback(output);
    	}
   });
-	return output;
 }
 
-function getDrivingDirections(endPoints, request)
+function getDrivingDirections(endPoints, callback)
 {
 	var mode = null;
 	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
@@ -37,14 +38,12 @@ function getDrivingDirections(endPoints, request)
       var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
       var steps_list = mode["routes"][0]["legs"][0]["steps"];
       var output = {"total_time":total_time,"steps_list":steps_list};
-      
-      
+			callback(output);
    	}
   });
-	return output;
 }
 
-function getBikingDirections(endPoints, request)
+function getBikingDirections(endPoints, callback)
 {
 	var mode = null;
 	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
@@ -57,10 +56,9 @@ function getBikingDirections(endPoints, request)
       var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
       var steps_list = mode["routes"][0]["legs"][0]["steps"];
       var output = {"total_time":total_time,"steps_list":steps_list};
-   
+			callback(output);
    	}
   });
-	return output;
 }
 
 module.exports = {
