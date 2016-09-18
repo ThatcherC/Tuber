@@ -23,8 +23,10 @@ function getWalkingDirections(endPoints, callback)
       var energy = time*walking_energy_p_sec;
       var stylepoints = time*walking_style_p_sec;
       var steps_list = parseDirections(mode);
+			var start_coords = retrieveStartCoords(mode);
+			var end_coords = retrieveEndCoords(mode);
       var output = {"time":time,"steps_list":steps_list};
-      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list};
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list,"start_coords":start_coords,"end_coords":end_coords};
 
 			callback(output);
    	}
