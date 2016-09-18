@@ -14,11 +14,25 @@ function initializeMap(){
         });
   startBox = document.getElementById('startLocation');
   endBox   = document.getElementById('endLocation');
+
+  startMarker = new google.maps.Marker({
+    position: {lat:0,lng:0},
+    map: null,
+    label: "Start Point",
+    draggable: true
+  });
+
+  endMarker = new google.maps.Marker({
+    position: {lat:0,lng:0},
+    map: null,
+    label: "Start Point",
+    draggable: true
+  });
 }
 
 function setStart(){
-  console.log("Setting start point");
   var center = map.getCenter();
+  startMarker.setMap(null);
   startMarker = new google.maps.Marker({
     position: center,
     map: map,
@@ -33,8 +47,8 @@ function setStart(){
 }
 
 function setDestination(){
-  console.log("Setting end point");
   var center = map.getCenter();
+  endMarker.setMap(null);
   endMarker = new google.maps.Marker({
     position: center,
     map: map,
