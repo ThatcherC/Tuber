@@ -80,17 +80,16 @@ function findBestMode(endPoints,
 
 				var unsorted_parameters = [];
 				var unsorted_names = [];
-				for (x in modeResults) {
-
+				for (x in modeResults) {        //break modeResults into two parts
 				  unsorted_names.push(x);
 	   	 		unsorted_parameters.push(modeResults[x][optimizationParameter]);
-
-
 				}
 
+        //sort the parameters
 				var sorted_parameters = JSON.parse(JSON.stringify(unsorted_parameters)).sort(function(a,b) { return a - b; });
 				var sorted_names = [];
 
+        //make sure the names are also sorted
 			  for(var i = 0; i < sorted_parameters.length; i++){
 					for(var j = 0; j < sorted_parameters.length; j++){
 
@@ -100,19 +99,13 @@ function findBestMode(endPoints,
 					}
 				}
 
-
-        //return sorted_names;
+        //recombine sorted_names;
 				var newModeResults = {};
 				for(var i= 0; i < sorted_parameters.length; i++){
 					newModeResults[sorted_names[i]] = modeResults[sorted_names[i]];
 				}
 
-
         callback(newModeResults);
-
-
-        //sort modes by chosen paramter
-
       });
     });
   });
