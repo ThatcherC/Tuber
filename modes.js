@@ -1,5 +1,5 @@
 var apis = require("./apis");
-
+var math = require("math.js");
 var modeList = {};
 var request = require('request');
 
@@ -118,7 +118,10 @@ addMode("qm", "Quantum Mechanical Tunneling", 'walking', function(walkingObject)
   return qmObject;
 });
 
+function toRadians(Value) {
+  return Value * Math.PI / 180;
 
+}
 function calcStraightDist(start_coords, end_coords) {
   var R = 6371e3; // metres
     var lat1 = start_coords["lat"]
