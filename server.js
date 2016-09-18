@@ -35,8 +35,7 @@ app.get("/",function(req,res){
 	res.render('main');
 });
 
-//start = start location as a string
-//destination =   end location as a string
+//endPoints = contains the starting and destination locations
 //enabledModes = list of names of enabled modes as strings
 //optimizationParameter = "time", "cost", "energy", "style points"
 //optimizationDirection = "up","down"
@@ -46,6 +45,7 @@ function findBestMode(endPoints,
 										  optimizationDirection)
 {
 	var request = require('request');
+  
   apis.getWalkingDirections(endPoints, function(walkingObject){
     apis.getDrivingDirections(endPoints, function(drivingObject){
       apis.getBikingDirections(endPoints, function(bikingObject){

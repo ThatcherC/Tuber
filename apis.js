@@ -15,9 +15,8 @@ function getWalkingDirections(endPoints, callback)
 	request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
       mode = JSON.parse(body);
-
-      var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
-      var steps_list = mode["routes"][0]["legs"][0]["steps"];
+      var total_time = parseTotalTime(mode);
+      var steps_list = parseDirections(mode);
       var output = {"total_time":total_time,"steps_list":steps_list};
 
 			callback(output);
@@ -35,8 +34,8 @@ function getDrivingDirections(endPoints, callback)
   request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
        mode = JSON.parse(body);
-      var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
-      var steps_list = mode["routes"][0]["legs"][0]["steps"];
+      var total_time = parseTotalTime(mode);
+      var steps_list = parseDirections(mode);
       var output = {"total_time":total_time,"steps_list":steps_list};
 			callback(output);
    	}
@@ -53,12 +52,22 @@ function getBikingDirections(endPoints, callback)
   request(apiUrl, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
          mode = JSON.parse(body);
-      var total_time = mode["routes"][0]["legs"][0]["duration"]["value"];
-      var steps_list = mode["routes"][0]["legs"][0]["steps"];
+      var total_time = parseTotalTime(mode);
+      var steps_list = parseDirections(mode);
       var output = {"total_time":total_time,"steps_list":steps_list};
 			callback(output);
    	}
   });
+}
+
+function parseTotalTime(mode)
+{
+  return mode["routes"][0]["legs"][0]["duration"]["value"];
+}
+
+function parseDirections(mode)
+{
+  return mode["routes"][0]["legs"][0]["steps"];
 }
 
 module.exports = {

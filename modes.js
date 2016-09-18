@@ -1,5 +1,6 @@
 
 var modeList = {};
+var request = require('request');
 
 //Creates a new mode with a name, a base mode (walking, driving, or other),
 //and a function to modify the base mode.
@@ -10,11 +11,6 @@ function addMode(name, baseMode, eval){
   modeList[name] = obj;
 }
 
-
-addMode("Cartwheeling", 'walking', function(walkingObject){
-  walkingObject.time = walkingObject.time*0.7;
-  walkingObject.energy = walkingObject.energy*2.5;
-});
 
 addMode("Cartwheeling", 'walking', function(walkingObject){
   var cartwheelingObject = {};
