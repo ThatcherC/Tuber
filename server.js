@@ -44,8 +44,6 @@ function findBestMode(endPoints,
 										  optimizationParameter,
 										  optimizationDirection)
 {
-	var request = require('request');
-  
   apis.getWalkingDirections(endPoints, function(walkingObject){
     apis.getDrivingDirections(endPoints, function(drivingObject){
       apis.getBikingDirections(endPoints, function(bikingObject){
