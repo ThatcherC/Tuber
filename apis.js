@@ -21,7 +21,7 @@ function getWalkingDirections(endPoints, callback)
       mode = JSON.parse(body);
       var time = parseTotalTime(mode);
       var energy = time*walking_energy_p_sec;
-      var stylepoints = time*walking_style_p_sec;
+      var stylepoints = 0.4*time*walking_style_p_sec;
       var steps_list = parseDirections(mode);
 			var start_coords = retrieveStartCoords(mode);
 			var end_coords = retrieveEndCoords(mode);

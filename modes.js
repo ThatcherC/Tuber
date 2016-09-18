@@ -20,11 +20,19 @@ addMode("biking", "Biking", 'biking', function(bikingObject){
   return bikingObject;
 });
 
+addMode("unicycling", "Unicycling", 'biking', function(bikingObject){
+  var bikingObject = JSON.parse(JSON.stringify(bikingObject));
+  bikingObject.time = bikingObject.time*1.1;
+  bikingObject.energy = bikingObject.energy*1.2;
+  bikingObject.stylepoints = bikingObject.stylepoints*2.0;
+  return bikingObject;
+});
+
 addMode("walking", "Walking", 'walking', function(walkingObject){
   var walkingObject = JSON.parse(JSON.stringify(walkingObject));
   walkingObject.time = walkingObject.time*1.0;
   walkingObject.energy = walkingObject.energy*1.0;
-  walkingObject.stylepoints = walkingObject.stylepoints*1.0;
+  walkingObject.stylepoints = walkingObject.stylepoints*.03;
   return walkingObject;
 });
 
@@ -32,7 +40,7 @@ addMode("driving", "Driving", 'driving', function(drivingObject){
   var drivingObject = JSON.parse(JSON.stringify(drivingObject));
   drivingObject.time = drivingObject.time*1.0;
   drivingObject.energy = drivingObject.energy*1.0;
-  drivingObject.stylepoints = drivingObject.stylepoints*1.0;
+  drivingObject.stylepoints = drivingObject.stylepoints*.20;
   return drivingObject;
 });
 
@@ -45,7 +53,7 @@ addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
 });
 
 
-addMode("hoverboarding1","Hoverboarding", 'biking', function(bikingObject){
+addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', function(bikingObject){
   var hoverboardingObject = JSON.parse(JSON.stringify(bikingObject));;
   hoverboardingObject.time = bikingObject.time*0.7;
   hoverboardingObject.energy = bikingObject.energy*0.1;
@@ -70,14 +78,6 @@ addMode("leapfrogging", "Leapfrogging", 'walking', function(walkingObject){
 });
 
 
-addMode("wheelchair","Wheelchair", 'walking', function(walkingObject){
-	var wheelchairObject = JSON.parse(JSON.stringify(walkingObject));;
-  wheelchairObject.time = walkingObject.time*2.9;
-  wheelchairObject.energy = walkingObject.energy*0;
-  walkingObject.stylepoints = walkingObject.stylepoints*.12;
-  return wheelchairObject;
-});
-
 addMode("skateboarding","Skateboarding", 'walking', function(bikingObject){
   var skateboardingObject = JSON.parse(JSON.stringify(bikingObject));;
   skateboardingObject.time = bikingObject.time*1.7;
@@ -99,7 +99,7 @@ addMode("airplane", "Airplane", 'walking', function(walkingObject){
   var speed = 250;
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
 
-  airplaneObject.time = directDistance/speed;
+  airplaneObject.time = (directDistance/speed)+3600;
   airplaneObject.energy = 0;
   airplaneObject.stylepoints = 5*(airplaneObject.time);/*depends on the type of plane*/
   return airplaneObject;
