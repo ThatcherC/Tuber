@@ -95,7 +95,7 @@ addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
   return golfcartingObject;
 });
 
-addMode("airplane", "Airplane", 'other', function(walkingObject){
+addMode("airplane", "Airplane", 'walking', function(walkingObject){
   var airplaneObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = 250;
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
@@ -107,7 +107,7 @@ addMode("airplane", "Airplane", 'other', function(walkingObject){
 });
 
 
-addMode("qm", "Quantum Mechanical Tunneling", 'other', function(walkingObject){
+addMode("qm", "Quantum Mechanical Tunneling", 'walking', function(walkingObject){
   var qmObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = Infinity;
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
