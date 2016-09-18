@@ -16,7 +16,7 @@ function addMode(shortName, displayName, baseMode, eval){
 
 
 addMode("biking", "Biking", 'biking', function(bikingObject){
-  var bikingObject = {};
+  var bikingObject = JSON.parse(JSON.stringify(bikingObject));
   bikingObject.time = bikingObject.time*1.0;
   bikingObject.energy = bikingObject.energy*1.0;
   bikingObject.stylepoints = bikingObject.stylepoints*1.0;
@@ -24,7 +24,7 @@ addMode("biking", "Biking", 'biking', function(bikingObject){
 });
 
 addMode("walking", "Walking", 'walking', function(walkingObject){
-  var walkingObject = {};
+  var walkingObject = JSON.parse(JSON.stringify(walkingObject));
   walkingObject.time = walkingObject.time*1.0;
   walkingObject.energy = walkingObject.energy*1.0;
   walkingObject.stylepoints = walkingObject.stylepoints*1.0;
@@ -32,7 +32,7 @@ addMode("walking", "Walking", 'walking', function(walkingObject){
 });
 
 addMode("driving", "Driving", 'driving', function(drivingObject){
-  var drivingObject = {};
+  var drivingObject = JSON.parse(JSON.stringify(drivingObject));
   drivingObject.time = drivingObject.time*1.0;
   drivingObject.energy = drivingObject.energy*1.0;
   drivingObject.stylepoints = drivingObject.stylepoints*1.0;
@@ -40,7 +40,7 @@ addMode("driving", "Driving", 'driving', function(drivingObject){
 });
 
 addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
-  var cartwheelingObject = {};
+  var cartwheelingObject = JSON.parse(JSON.stringify(walkingObject));;
   cartwheelingObject.time = walkingObject.time*5.4;
   cartwheelingObject.energy = walkingObject.energy*12.5;
   cartwheelingObject.stylepoints = walkingObject.stylepoints*.21;
@@ -48,7 +48,7 @@ addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
 });
 
 addMode("hoverboarding1","Hoverboarding", 'biking', function(bikingObject){
-  var hoverboardingObject = {};
+  var hoverboardingObject = JSON.parse(JSON.stringify(bikingObject));;
   hoverboardingObject.time = bikingObject.time*0.7;
   hoverboardingObject.energy = bikingObject.energy*0.1;
   hoverboardingObject.stylepoints = bikingObject.stylepoints*.65;
@@ -56,7 +56,7 @@ addMode("hoverboarding1","Hoverboarding", 'biking', function(bikingObject){
 });
 
 addMode("hoverboarding2","Hoverboarding- Segway Style", 'biking', function(bikingObject){
-  var hoverboarding2Object = {};
+  var hoverboarding2Object = JSON.parse(JSON.stringify(bikingObject));;
   hoverboarding2Object.time = bikingObject.time*0.3;
   hoverboarding2Object.energy = bikingObject.energy*0.1;
   hoverboarding2Object.stylepoints = bikingObject.stylepoints*.3;
@@ -64,7 +64,7 @@ addMode("hoverboarding2","Hoverboarding- Segway Style", 'biking', function(bikin
 });
 
 addMode("leapfrogging", "Leapfrogging", 'walking', function(walkingObject){
-	var leapfroggingObject = {};
+	var leapfroggingObject = JSON.parse(JSON.stringify(walkingObject));;
   leapfroggingObject.time = walkingObject.time*5.9;
   leapfroggingObject.energy = walkingObject.energy*8.1;
   leapfroggingObject.stylepoints = walkingObject.stylepoints*.54;
@@ -72,7 +72,7 @@ addMode("leapfrogging", "Leapfrogging", 'walking', function(walkingObject){
 });
 
 addMode("wheelchair","Wheelchair", 'walking', function(walkingObject){
-	var wheelchairObject = {};
+	var wheelchairObject = JSON.parse(JSON.stringify(walkingObject));;
   wheelchairObject.time = walkingObject.time*2.9;
   wheelchairObject.energy = walkingObject.energy*0;
   walkingObject.stylepoints = walkingObject.stylepoints*.12;
@@ -80,7 +80,7 @@ addMode("wheelchair","Wheelchair", 'walking', function(walkingObject){
 });
 
 addMode("skateboarding","Skateboarding", 'walking', function(bikingObject){
-  var skateboardingObject = {};
+  var skateboardingObject = JSON.parse(JSON.stringify(bikingObject));;
   skateboardingObject.time = bikingObject.time*1.7;
   skateboardingObject.energy = bikingObject.energy*2.6;
   skateboardingObject.stylepoints = bikingObject.stylepoints*.15;
@@ -88,7 +88,7 @@ addMode("skateboarding","Skateboarding", 'walking', function(bikingObject){
 });
 
 addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
-  var golfcartingObject = {};
+  var golfcartingObject = JSON.parse(JSON.stringify(bikingObject));;
   golfcartingObject.time = bikingObject.time*1.7;
   golfcartingObject.energy = bikingObject.energy*2.6;
   golfcartingObject.stylepoints = bikingObject.stylepoints*.15;
@@ -96,7 +96,7 @@ addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
 });
 
 addMode("airplane", "Airplane", 'other', function(walkingObject){
-  var airplaneObject = {};
+  var airplaneObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = 250;
   console.log(walkingObject)
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
@@ -108,7 +108,7 @@ addMode("airplane", "Airplane", 'other', function(walkingObject){
 });
 
 addMode("qm", "Quantum Mechanical Tunneling", 'other', function(walkingObject){
-  var qmObject = {};
+  var qmObject = JSON.parse(JSON.stringify(walkingObject));;
   var speed = Infinity;
   console.log(walkingObject)
   var directDistance = calcStraightDist(walkingObject.start_coords,walkingObject.end_coords);
