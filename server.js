@@ -105,10 +105,13 @@ function findBestMode(endPoints,
 
         return sorted_names;
 
-
-
+	 var modeName = modes.modeList[enabledModes[i]].displayName;
+          modeResults[modeName] = result;
         }
 
+
+
+        callback(modeResults);
 
 
 
