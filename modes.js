@@ -14,32 +14,31 @@ function addMode(shortName, displayName, baseMode, eval){
 }
 
 
-
-addMode("biking", "Biking", 'biking', function(bikingObject){
-  var bikingObject = {};
-  bikingObject.time = bikingObject.time*1.0;
-  bikingObject.energy = bikingObject.energy*1.0;
-  bikingObject.stylepoints = bikingObject.stylepoints*1.0;
-  return bikingObject;
+addMode("biking1", "Biking", "biking", function(bikingObject){
+  var biking1Object = {};
+  biking1Object.time = bikingObject.time;
+  biking1Object.energy = bikingObject.energy;
+  biking1Object.stylepoints = bikingObject.stylepoints;
+  return biking1Object;
 });
 
-addMode("walking", "Walking", 'walking', function(walkingObject){
-  var walkingObject = {};
-  walkingObject.time = walkingObject.time*1.0;
-  walkingObject.energy = walkingObject.energy*1.0;
-  walkingObject.stylepoints = walkingObject.stylepoints*1.0;
-  return walkingObject;
+addMode("walking1", "Walking", "walking", function(walkingObject){
+  var walking1Object = {};
+  walking1Object.time = walkingObject.time;
+  walking1Object.energy = walkingObject.energy;
+  walking1Object.stylepoints = walkingObject.stylepoints;
+  return walking1Object;
 });
 
-addMode("driving", "Driving", 'driving', function(drivingObject){
-  var drivingObject = {};
-  drivingObject.time = drivingObject.time*1.0;
-  drivingObject.energy = drivingObject.energy*1.0;
-  drivingObject.stylepoints = drivingObject.stylepoints*1.0;
-  return drivingObject;
+addMode("driving1", "Driving", "driving", function(drivingObject){
+  var driving1Object = {};
+  driving1Object.time = drivingObject.time;
+  driving1Object.energy = drivingObject.energy;
+  driving1Object.stylepoints = drivingObject.stylepoints;
+  return driving1Object;
 });
 
-addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
+addMode("cartwheeling", "Cartwheeling", "walking", function(walkingObject){
   var cartwheelingObject = {};
   cartwheelingObject.time = walkingObject.time*5.4;
   cartwheelingObject.energy = walkingObject.energy*12.5;
@@ -48,7 +47,7 @@ addMode("cartwheeling", "Cartwheeling", 'walking', function(walkingObject){
 });
 
 
-addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', function(bikingObject){
+addMode("hoverboarding1","Hoverboarding- Back to the Future Style", "biking", function(bikingObject){
   var hoverboardingObject = {};
   hoverboardingObject.time = bikingObject.time*0.7;
   hoverboardingObject.energy = bikingObject.energy*0.1;
@@ -56,7 +55,7 @@ addMode("hoverboarding1","Hoverboarding- Back to the Future Style", 'biking', fu
   return hoverboardingObject;
 });
 
-addMode("hoverboarding2","Hoverboarding- Segway Style", 'biking', function(bikingObject){
+addMode("hoverboarding2","Hoverboarding- Segway Style", "biking", function(bikingObject){
   var hoverboarding2Object = {};
   hoverboarding2Object.time = bikingObject.time*0.3;
   hoverboarding2Object.energy = bikingObject.energy*0.1;
@@ -64,7 +63,7 @@ addMode("hoverboarding2","Hoverboarding- Segway Style", 'biking', function(bikin
   return hoverboarding2Object;
 });
 
-addMode("leapfrogging", "Leapfrogging", 'walking', function(walkingObject){
+addMode("leapfrogging", "Leapfrogging", "walking", function(walkingObject){
 	var leapfroggingObject = {};
   leapfroggingObject.time = walkingObject.time*5.9;
   leapfroggingObject.energy = walkingObject.energy*8.1;
@@ -72,7 +71,7 @@ addMode("leapfrogging", "Leapfrogging", 'walking', function(walkingObject){
   return leapfroggingObject;
 });
 
-addMode("wheelchair","Wheelchair", 'walking', function(walkingObject){
+addMode("wheelchair","Wheelchair", "walking", function(walkingObject){
 	var wheelchairObject = {};
   wheelchairObject.time = walkingObject.time*2.9;
   wheelchairObject.energy = walkingObject.energy*0;
@@ -80,7 +79,7 @@ addMode("wheelchair","Wheelchair", 'walking', function(walkingObject){
   return wheelchairObject;
 });
 
-addMode("skateboarding","Skateboarding", 'walking', function(bikingObject){
+addMode("skateboarding","Skateboarding", "walking", function(bikingObject){
   var skateboardingObject = {};
   skateboardingObject.time = bikingObject.time*1.7;
   skateboardingObject.energy = bikingObject.energy*2.6;
@@ -88,7 +87,7 @@ addMode("skateboarding","Skateboarding", 'walking', function(bikingObject){
   return skateboardingObject;
 });
 
-addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
+addMode("golfcarting", "Golfcarting", "biking", function(bikingObject){
   var golfcartingObject = {};
   golfcartingObject.time = bikingObject.time*1.7;
   golfcartingObject.energy = bikingObject.energy*2.6;
@@ -96,7 +95,7 @@ addMode("golfcarting", "Golfcarting", 'biking', function(bikingObject){
   return golfcartingObject;
 });
 
-addMode("airplane", "Airplane", 'other', function(walkingObject){
+addMode("airplane", "Airplane", "other", function(walkingObject){
   var airplaneObject = {};
   var speed = 250;
   console.log(walkingObject)
@@ -104,11 +103,11 @@ addMode("airplane", "Airplane", 'other', function(walkingObject){
 
   airplaneObject.time = directDistance/speed;
   airplaneObject.energy = 0;
-  airplaneObject.stylepoints = 1;/*depends on the type of plane*/
+  airplaneObject.stylepoints = 5*(airplaneObject.time);/*depends on the type of plane*/
   return airplaneObject;
 });
 
-addMode("qm", "Quantum Mechanical Tunneling", 'other', function(walkingObject){
+addMode("qm", "Quantum Mechanical Tunneling", "other", function(walkingObject){
   var qmObject = {};
   var speed = Infinity;
   console.log(walkingObject)
