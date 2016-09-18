@@ -20,15 +20,10 @@ app.listen(8080);
 //Receives post data from the browser. Data is stored in the object req.body
 app.post("/",function(req, res){
 	var endPoints = req.body;
-	findBestMode(endPoints, null, null, null);
+	findBestMode(endPoints, ["cartwheeling"], null, null);
 	res.send(req.body);
 	// var modes = {"driving":"", "walking":"", "bicycling":""};
 	endPoints = {start: req.body.start, end:req.body.end};
-
-  //Test: shows driving direction for endpoints
-  apis.getDrivingDirections(endPoints,function(otpt){
-    console.log(otpt);
-  });
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
@@ -53,21 +48,21 @@ function findBestMode(endPoints,
 
         for(var i = 0; i < enabledModes.length; i++){
           var object = {};
-          if(modeList[enabledModes[i]].baseMode == 'walking') {
+          if(modes.modeList[enabledModes[i]].baseMode == 'walking') {
             object = JSON.parse(JSON.stringify(walkingObject));
           }
-          else if(modeList[enabledModes[i]].baseMode == 'driving') {
+          else if(modes.modeList[enabledModes[i]].baseMode == 'driving') {
             object = JSON.parse(JSON.stringify(drivingObject));
-          }else if(modeList[enabledModes[i]].baseMode == 'biking'){
+          }else if(modes.modeList[enabledModes[i]].baseMode == 'biking'){
             object = JSON.parse(JSON.stringify(drivingObject));
           }else {
-	    object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
-            //what TODO here? pass start and end lat/lng to object???
+            object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
           }
-          var result = modeList[enabledModes[i]].eval(object);
+          var result = modes.modeList[enabledModes[i]].eval(object);
           modeResults[i] = result;
         }
 
+        console.log(modeResults);
         //sort modes by chosen paramter
         
 

@@ -19,12 +19,12 @@ function getWalkingDirections(endPoints, callback)
 	request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
       mode = JSON.parse(body);
-      var total_time = parseTotalTime(mode);
-      var total_energy = total_time*walking_energy_p_sec;
-      var total_style = total_time*walking_style_p_sec;
+      var time = parseTotalTime(mode);
+      var energy = time*walking_energy_p_sec;
+      var stylepoints = time*walking_style_p_sec;
       var steps_list = parseDirections(mode);
-      var output = {"total_time":total_time,"steps_list":steps_list};
-      var output = {"total_time":total_time,"total_energy":total_energy,"total_style":total_style,"steps_list":steps_list};
+      var output = {"time":time,"steps_list":steps_list};
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list};
 
 			callback(output);
    	}
@@ -45,11 +45,11 @@ function getDrivingDirections(endPoints, callback)
   request(apiUrl, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
        mode = JSON.parse(body);
-      var total_time = parseTotalTime(mode);
-      var total_energy = total_time*driving_energy_p_sec;
-      var total_style = total_time*driving_style_p_sec;
+      var time = parseTotalTime(mode);
+      var energy = time*driving_energy_p_sec;
+      var stylepoints = time*driving_style_p_sec;
       var steps_list = parseDirections(mode);
-      var output = {"total_time":total_time,"total_energy":total_energy,"total_style":total_style,"steps_list":steps_list};
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list};
 			callback(output);
    	}
   });
@@ -69,11 +69,11 @@ function getBikingDirections(endPoints, callback)
   request(apiUrl, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
          mode = JSON.parse(body);
-      var total_time = parseTotalTime(mode);
-      var total_energy = total_time*biking_energy_p_sec;
-      var total_style = total_time*biking_energy_p_sec;
+      var time = parseTotalTime(mode);
+      var energy = time*biking_energy_p_sec;
+      var stylepoints = time*biking_energy_p_sec;
       var steps_list = parseDirections(mode);
-      var output = {"total_time":total_time,"total_energy":total_energy,"total_style":total_style,"steps_list":steps_list};
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list};
 			callback(output);
    	}
   });
@@ -102,6 +102,10 @@ function parseDirections(mode)
 }
 
 module.exports = {
+  parseDirections: parseDirections,
+  parseTotalTime: parseTotalTime,
+  retrieveEndCoords: retrieveEndCoords,
+  retrieveStartCoords: retrieveStartCoords,
 	getWalkingDirections: getWalkingDirections,
 	getDrivingDirections: getDrivingDirections,
 	getBikingDirections:  getBikingDirections
