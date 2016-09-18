@@ -46,9 +46,29 @@
               </label>
             </div>
           <% }) %>
-
-
         </form>
+
+        <!-- results -->
+        <% if(results != null){ %>
+          <% var resultKeys = Object.keys(results); %>
+          <table class="table table-hover">
+            <tr>
+              <th>Mode</th>
+              <th>Time</th>
+              <th>Energy</th>
+              <th>Style Points</th>
+            </tr>
+          <% resultKeys.forEach(function(key){ %>
+            <% var mode = results[key]; %>
+            <tr>
+              <td> <%= key %> </td>
+              <td> <%= mode.time.toFixed(0) %>s </td>
+              <td> <%= mode.energy.toFixed(1) %> kcal </td>
+              <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
+            </tr>
+          <% }); %>
+          </table>
+        <% } %>
 
       </div>
       <div class="col-lg-8"><div style="height:100%" id="gmap">Map didn't load</div></div>
