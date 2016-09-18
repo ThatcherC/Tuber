@@ -42,7 +42,7 @@ function findBestMode(endPoints,
   drivingObject = apis.getDrivingDirections(endPoints, request);
   bikingObject = apis.getBikingDirections(endPoints, request);
 
-  var modeResults = [];
+  var modeResults = {};
 
   for(var i = 0; i < enabledModes.length; i++){
     var object = {};
@@ -57,7 +57,14 @@ function findBestMode(endPoints,
       //what TODO here? pass start and end lat/lng to object???
       // TODO pass lat/long and (prob) distance to object
     }
-    var result = modeList[enabledModes[i]].eval(object);
-    modeResults[i] = result;
+
+    
+    var result = enabledModes[i].optimizationParameter * object["total_time"]
+    modeResults[enabledModes[i]] = result;
+
+//modeList[enabledModes[i]].eval(object);
+    //modeResults[i] = result;
+    
+
   }
 }
