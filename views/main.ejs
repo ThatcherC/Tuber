@@ -38,43 +38,54 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-offset-10 col-sm-2">
-              <button type="submit" class="btn btn-default btn-lg btn-block">Go!</button>
+            <div class="col-sm-offset-4 col-sm-2">
+              <button type="submit" class="btn btn-default">Go!</button>
             </div>
           </div>
 
+          </br></br>
+
           <!-- modes -->
-          <% var keys = Object.keys(modes); %>
-          <% keys.forEach(function(key){ %>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="<%= modes[key].shortName%>" value="">
-                <%= modes[key].displayName%>
-              </label>
+          <div class="panel panel-default">
+            <div class="panel-heading">Modes</div>
+            <div class="panel-body">
+              <% var keys = Object.keys(modes); %>
+              <% keys.forEach(function(key){ %>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="<%= modes[key].shortName%>" value="">
+                    <%= modes[key].displayName%>
+                  </label>
+                </div>
+              <% }) %>
             </div>
-          <% }) %>
+          </div>
         </form>
 
         <!-- results -->
         <% if(results != null){ %>
-          <% var resultKeys = Object.keys(results); %>
-          <table class="table table-hover">
-            <tr>
-              <th>Mode</th>
-              <th>Time</th>
-              <th>Energy</th>
-              <th>Style Points</th>
-            </tr>
-          <% resultKeys.forEach(function(key){ %>
-            <% var mode = results[key]; %>
-            <tr>
-              <td> <%= key %> </td>
-              <td> <%= mode.time.toFixed(0) %>s </td>
-              <td> <%= mode.energy.toFixed(1) %> kcal </td>
-              <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
-            </tr>
-          <% }); %>
-          </table>
+          <div class="panel panel-default">
+            <div class="panel-heading">Results</div>
+
+            <% var resultKeys = Object.keys(results); %>
+            <table class="table table-hover">
+              <tr>
+                <th>Mode</th>
+                <th>Time</th>
+                <th>Energy</th>
+                <th>Style Points</th>
+              </tr>
+            <% resultKeys.forEach(function(key){ %>
+              <% var mode = results[key]; %>
+              <tr>
+                <td> <%= key %> </td>
+                <td> <%= mode.time.toFixed(0) %>s </td>
+                <td> <%= mode.energy.toFixed(1) %> kcal </td>
+                <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
+              </tr>
+            <% }); %>
+            </table>
+          </div>
         <% } %>
 
       </div>

@@ -105,7 +105,7 @@ function findBestMode(endPoints,
 					newModeResults[sorted_names[i]] = modeResults[sorted_names[i]];
 				}
 
-        callback(newModeResults);
+        callback(modeResults);
       });
     });
   });
