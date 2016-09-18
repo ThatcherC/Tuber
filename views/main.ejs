@@ -5,12 +5,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script type="text/javascript" src="tuber.js"></script>
   <script src="https://use.fontawesome.com/b979f7ff47.js"></script>
+  <script>
+    var fullDirectionsData = <%- dataAsString %>;
+  </script>
   <title>Toober Navigation</title>
 </head>
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-4">
         <h1>Toober</h1>
 
         <form action="/" method="post">
@@ -38,47 +41,64 @@
           </div>
 
           <div class="form-group">
-            <div class="col-sm-offset-10 col-sm-2">
-              <button type="submit" class="btn btn-default btn-lg btn-block">Go!</button>
+            <div class="col-sm-offset-4 col-sm-2">
+              <button type="submit" class="btn btn-default">Go!</button>
             </div>
           </div>
 
+          </br></br>
+
           <!-- modes -->
-          <% var keys = Object.keys(modes); %>
-          <% keys.forEach(function(key){ %>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="<%= modes[key].shortName%>" value="">
-                <%= modes[key].displayName%>
-              </label>
+          <div class="panel panel-default">
+            <div class="panel-heading">Modes</div>
+            <div class="panel-body">
+              <% var keys = Object.keys(modes); %>
+              <% keys.forEach(function(key){ %>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="<%= modes[key].shortName%>" value="">
+                    <%= modes[key].displayName%>
+                  </label>
+                </div>
+              <% }) %>
             </div>
-          <% }) %>
+          </div>
         </form>
 
-        <!-- results -->
-        <% if(results != null){ %>
-          <% var resultKeys = Object.keys(results); %>
-          <table class="table table-hover">
-            <tr>
-              <th>Mode</th>
-              <th>Time</th>
-              <th>Energy</th>
-              <th>Style Points</th>
-            </tr>
-          <% resultKeys.forEach(function(key){ %>
-            <% var mode = results[key]; %>
-            <tr>
-              <td> <%= key %> </td>
-              <td> <%= mode.time.toFixed(0) %>s </td>
-              <td> <%= mode.energy.toFixed(1) %> kcal </td>
-              <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
-            </tr>
-          <% }); %>
-          </table>
-        <% } %>
+        <div style="overflow-y:scroll; height = 100px">
+          <!-- results -->
+          <% if(results != null){ %>
+            <div class="panel panel-default">
+              <div class="panel-heading">Results</div>
+
+              <% var resultKeys = Object.keys(results); %>
+              <table class="table table-hover">
+                <tr>
+                  <th>Mode</th>
+                  <th>Time</th>
+                  <th>Energy</th>
+                  <th>Style Points</th>
+                </tr>
+              <% resultKeys.forEach(function(key){ %>
+                <% var mode = results[key]; %>
+                <tr>
+                  <td> <%= key %> </td>
+                  <td> <%= mode.time.toFixed(0) %>s </td>
+                  <td> <%= mode.energy.toFixed(1) %> kcal </td>
+                  <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
+                </tr>
+              <% }); %>
+              </table>
+            </div>
+          <% } %>
+          <!--directions-->
+          <div id="directionZones">
+          </div>
+
+        </div>
 
       </div>
-      <div class="col-lg-9"><div style="height:100%" id="gmap">Map didn't load</div></div>
+      <div class="col-lg-8"><div style="height:100%" id="gmap">Map didn't load</div></div>
     </div>
   </div>
   <script async defer

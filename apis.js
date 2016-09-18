@@ -10,7 +10,29 @@ function getWalkingDirections(endPoints, callback)
 	var mode = null;
 	var walking_energy_p_sec = .05;
 	var walking_style_p_sec = 1;
-	callAPI(endPoints, callback, walking_energy_p_sec, walking_style_p_sec);
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  + endPoints["start"] + "&destination=" + endPoints["end"] +
+  "&mode=walking&key=" + APIKEY
+
+  var output = {};
+
+	request(apiUrl, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+      mode = JSON.parse(body);
+      var time = parseTotalTime(mode);
+      var energy = time*walking_energy_p_sec;
+      var stylepoints = time*walking_style_p_sec;
+      var steps_list = parseDirections(mode);
+			var start_coords = retrieveStartCoords(mode);
+			var end_coords = retrieveEndCoords(mode);
+      var output = {"time":time,"steps_list":steps_list};
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list,
+      "start_coords":start_coords,"end_coords":end_coords};
+      console.log(output["start_coords"]);
+
+			callback(output);
+   	}
+  });
 }
 
 function getDrivingDirections(endPoints, callback)
@@ -18,7 +40,26 @@ function getDrivingDirections(endPoints, callback)
 	var mode = null;
 	var driving_energy_p_sec = .01;
 	var driving_style_p_sec = 1;
-	callAPI(endPoints, callback, driving_energy_p_sec, driving_style_p_sec);
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  + endPoints["start"] + "&destination=" + endPoints["end"] +
+  "&mode=driving&key=" + APIKEY
+
+  var output = {};
+
+  request(apiUrl, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+       mode = JSON.parse(body);
+      var time = parseTotalTime(mode);
+      var energy = time*driving_energy_p_sec;
+      var stylepoints = time*driving_style_p_sec;
+      var steps_list = parseDirections(mode);
+      var start_coords = retrieveStartCoords(mode);
+      var end_coords = retrieveEndCoords(mode);
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list, 
+      "start_coords":start_coords,"end_coords":end_coords};
+			callback(output);
+   	}
+  });
 }
 
 function getBikingDirections(endPoints, callback)
@@ -26,19 +67,14 @@ function getBikingDirections(endPoints, callback)
 	var mode = null;
 	var biking_energy_p_sec = .14;
 	var biking_style_p_sec = 1;
-  callAPI(endPoints, callback, biking_energy_p_sec, biking_style_p_sec);
-}
-
-function callAPI(endPoints, callback, energy_p_sec, style_p_sec)
-{
-  apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
+	apiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin="
   + endPoints["start"] + "&destination=" + endPoints["end"] +
   "&mode=bicycling&key=" + APIKEY
 
   var output = {};
 
   request(apiUrl, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
+			if (!error && response.statusCode == 200) {
          mode = JSON.parse(body);
       var time = parseTotalTime(mode);
       var energy = time*biking_energy_p_sec;
@@ -46,32 +82,33 @@ function callAPI(endPoints, callback, energy_p_sec, style_p_sec)
       var steps_list = parseDirections(mode);
       var start_coords = retrieveStartCoords(mode);
       var end_coords = retrieveEndCoords(mode);
-      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list};
-      callback(output);
-    }
+      var output = {"time":time,"energy":energy,"stylepoints":stylepoints,"steps_list":steps_list, 
+      "start_coords":start_coords,"end_coords":end_coords};
+			callback(output);
+   	}
   });
 }
 
-function retrieveStartCoords(baseModeResult)
+function retrieveStartCoords(mode)
 {
   /* access w ["lat"] ["lng"] */
-  return baseModeResult["routes"][0]["legs"]["start_location"];
+  return mode["routes"][0]["legs"][0]["start_location"];
 }
 
-function retrieveEndCoords(baseModeResult)
+function retrieveEndCoords(mode)
 {
   /* access w ["lat"] ["lng"] */
-  return baseModeResult["routes"][0]["legs"]["end_location"];
+  return mode["routes"][0]["legs"][0]["end_location"];
 }
 
-function parseTotalTime(baseModeResult)
+function parseTotalTime(mode)
 {
-  return baseModeResult["routes"][0]["legs"][0]["duration"]["value"];
+  return mode["routes"][0]["legs"][0]["duration"]["value"];
 }
 
-function parseDirections(baseModeResult)
+function parseDirections(mode)
 {
-  return baseModeResult["routes"][0]["legs"][0]["steps"];
+  return mode["routes"][0]["legs"][0]["steps"];
 }
 
 module.exports = {

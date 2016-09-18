@@ -14,11 +14,40 @@ function initializeMap(){
         });
   startBox = document.getElementById('startLocation');
   endBox   = document.getElementById('endLocation');
+
+  startMarker = new google.maps.Marker({
+    position: {lat:0,lng:0},
+    map: null,
+    label: "Start Point",
+    draggable: true
+  });
+
+  endMarker = new google.maps.Marker({
+    position: {lat:0,lng:0},
+    map: null,
+    label: "Start Point",
+    draggable: true
+  });
+  console.log(fullDirectionsData);
 }
 
+function populateDirections(modeName){
+  var steps = fullDirectionsData[modeName].steps_list;
+  var htmlString = '<div class="panel panel-default"><div class="panel-heading">Directions</div>';
+  htmlString += '<div class="panel-body">'
+  for(var i = 0; i < steps.length; i++){
+    htmlString += steps[i].html_instructions+"</br>";
+    console.log(steps[i]);
+  }
+  htmlString += "</div></div>"
+  console.log(htmlString);
+  document.getElementById("directionZones").innerHTML = htmlString;
+}
+
+
 function setStart(){
-  console.log("Setting start point");
   var center = map.getCenter();
+  startMarker.setMap(null);
   startMarker = new google.maps.Marker({
     position: center,
     map: map,
@@ -33,8 +62,8 @@ function setStart(){
 }
 
 function setDestination(){
-  console.log("Setting end point");
   var center = map.getCenter();
+  endMarker.setMap(null);
   endMarker = new google.maps.Marker({
     position: center,
     map: map,

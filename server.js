@@ -24,15 +24,14 @@ app.post("/",function(req, res){
   var enabledModes = Object.keys(req.body).slice(2);
 
 	findBestMode(endPoints, enabledModes, null, null,function(sortedResults){
-    console.log(sortedResults);
-    res.render('main',{modes: modes.modeList, results: sortedResults});
+    res.render('main',{modes: modes.modeList, results: sortedResults, dataAsString: JSON.stringify(sortedResults)});
   });
 	//res.send(req.body);
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
 app.get("/",function(req,res){
-	res.render('main',{modes: modes.modeList, results:null});
+	res.render('main',{modes: modes.modeList, results:null, dataAsString: "{}"});
 });
 
 
@@ -67,16 +66,18 @@ function findBestMode(endPoints,
           else if(modes.modeList[enabledModes[i]].baseMode == 'driving') {
             object = JSON.parse(JSON.stringify(drivingObject));
           }else if(modes.modeList[enabledModes[i]].baseMode == 'biking'){
-            object = JSON.parse(JSON.stringify(drivingObject));
+            object = JSON.parse(JSON.stringify(bikingObject));
           }else {
 
 
-            object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
+            object = {"total_time":enabledModes[i]["time"],"total_energy":enabledModes[i]["energy"],"total_style":enabledModes[i]["stylepoints"],"directions":0}
           }
           var result = modes.modeList[enabledModes[i]].eval(object);
           var modeName = modes.modeList[enabledModes[i]].displayName;
           modeResults[modeName] = result;
         }
+
+				console.log(modeResults);
 
 				var unsorted_parameters = [];
 				var unsorted_names = [];
@@ -110,7 +111,7 @@ function findBestMode(endPoints,
 					newModeResults[sorted_names[i]] = modeResults[sorted_names[i]];
 				}
 
-        callback(newModeResults);
+        callback(modeResults);
       });
     });
   });
