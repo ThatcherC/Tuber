@@ -141,7 +141,13 @@ addMode("qm", "Quantum Tunneling", 'walking', function(walkingObject){
     html_instructions: 'Wait for a <b>very very </b> </b> long time... </b>',
     polyline: { points: 'ckpaGpg{pLOFWNWNcEtBMD' },
     start_location: { lat: 42.359702, lng: -71.0874498 },
-    travel_mode: 'WALKING' }];
+    travel_mode: 'WALKING' },{ distance: { text: '0.1 mi', value: 166 },
+      duration: { text: '2 mins', value: 123 },
+      end_location: { lat: 42.3610669, lng: -71.0882724 },
+      html_instructions: 'Arrive at your <b>destination </b>  </b>',
+      polyline: { points: 'ckpaGpg{pLOFWNWNcEtBMD' },
+      start_location: { lat: 42.359702, lng: -71.0874498 },
+      travel_mode: 'WALKING' }];
 
   qmObject.steps_list = steps_list
 
