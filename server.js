@@ -71,7 +71,7 @@ function findBestMode(endPoints,
           }else {
 
 
-            object = {"total_time":0,"total_energy":0,"total_style":0,"directions":0}
+            object = {"total_time":enabledModes[i]["time"],"total_energy":enabledModes[i]["energy"],"total_style":enabledModes[i]["stylepoints"],"directions":0}
           }
           var result = modes.modeList[enabledModes[i]].eval(object);
           var modeName = modes.modeList[enabledModes[i]].displayName;
