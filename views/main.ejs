@@ -81,9 +81,11 @@
                 </tr>
               <% resultKeys.forEach(function(key){ %>
                 <% var mode = results[key]; %>
+                <% var ejs = (mode.time)/60; %>
                 <tr onclick="populateDirections('<%= key %>')">
                   <td> <%= key %> </td>
-                  <td> <%= mode.time.toFixed(0) %>s </td>
+
+                  <td> <%= ejs.toFixed(1) %> m </td>
                   <td> <%= mode.energy.toFixed(1) %> kcal </td>
                   <td> <%= mode.stylepoints.toFixed(0) %> spts </td>
                 </tr>
