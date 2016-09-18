@@ -24,14 +24,15 @@ app.post("/",function(req, res){
   var enabledModes = Object.keys(req.body).slice(2);
 
 	findBestMode(endPoints, enabledModes, null, null,function(sortedResults){
-    res.render('main',{modes: modes.modeList, results: sortedResults, dataAsString: JSON.stringify(sortedResults)});
+    console.log(sortedResults);
+    res.render('main',{modes: modes.modeList, results: sortedResults});
   });
 	//res.send(req.body);
 });
 
 //http://stackoverflow.com/questions/4529586/render-basic-html-view-in-node-js-express
 app.get("/",function(req,res){
-	res.render('main',{modes: modes.modeList, results:null, dataAsString: "{}"});
+	res.render('main',{modes: modes.modeList, results:null});
 });
 
 
@@ -76,8 +77,6 @@ function findBestMode(endPoints,
           var modeName = modes.modeList[enabledModes[i]].displayName;
           modeResults[modeName] = result;
         }
-
-				console.log(modeResults);
 
 				var unsorted_parameters = [];
 				var unsorted_names = [];
