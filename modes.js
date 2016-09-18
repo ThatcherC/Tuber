@@ -1,3 +1,4 @@
+var apis = require("./apis");
 
 var modeList = {};
 var request = require('request');
